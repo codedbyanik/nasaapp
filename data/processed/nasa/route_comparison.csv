@@ -1,0 +1,7 @@
+corridor,mode,distance_km,mean_slope_deg,max_cell_slope_deg,ascent_m,descent_m,steep_cell_distance_km,exposure_penalty_km,walk_hours_assumed,oxygen_kg_assumed
+Landing to selected delta-area waypoint,baseline,3.234363,3.543751,16.379999,111.660400,9.620361,0.518808,1.225198,1.078121,1.121246
+Landing to selected delta-area waypoint,terrain_aware,3.234386,3.192239,16.379999,108.630371,6.590332,0.518808,1.082453,1.078129,1.121254
+Crater-floor study corridor,baseline,3.044904,2.681433,10.100000,85.729736,5.529785,0.140918,0.835541,1.014968,1.055567
+Crater-floor study corridor,terrain_aware,3.048164,2.514175,7.160000,91.189941,10.989990,0.000000,0.775721,1.016055,1.056697
+Western terrain study corridor,baseline,3.495759,4.359206,15.400000,125.009521,25.609375,0.917944,1.738602,1.165253,1.211863
+Western terrain study corridor,terrain_aware,3.564234,3.557668,14.340000,122.000244,22.600098,0.398818,1.251162,1.188078,1.235601

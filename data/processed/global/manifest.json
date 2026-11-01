@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "product": "MEGT90N000EB",
+  "counts_product": "MEGC90N000EB",
+  "pixels_per_degree": 16,
+  "nominal_spacing_m": 3705,
+  "tile_degrees": 10,
+  "tile_size": 160,
+  "tile_format": "little-endian signed int16 elevation_m, observation_count interleaved; north-to-south, east-positive 0..360",
+  "acquired_start": "1997-09-15",
+  "acquired_end": "2001-06-30",
+  "product_created": "2003-04-03",
+  "release": "2003-05-07",
+  "source_url": "https://pds-geosciences.wustl.edu/missions/mgs/megdr.html",
+  "products": [
+    {
+      "file": "megt90n000eb.img",
+      "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg016/megt90n000eb.img",
+      "sha256": "d18d9b9ab8c5516d02e157dd2cde0f1d0d160c21940e953ba22391269a545e7b"
+    },
+    {
+      "file": "megt90n000eb.lbl",
+      "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg016/megt90n000eb.lbl",
+      "sha256": "0f2bd919dddb86d83489a008d3007bd915507c892a0f22ce49ad5dd5d2fc7d8a"
+    },
+    {
+      "file": "megt90n000eb.xml",
+      "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg016/megt90n000eb.xml",
+      "sha256": "c393221db2de31916b30113ce28841dd967456dadb9bf2735eb30496eb37afa2"
+    },
+    {
+      "file": "megc90n000eb.img",
+      "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg016/megc90n000eb.img",
+      "sha256": "9a300c6cd9f5a282ae31299be228ea2e75993049e88c9f6ab69a84f4db5f01d7"
+    },
+    {
+      "file": "megc90n000eb.lbl",
+      "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg016/megc90n000eb.lbl",
+      "sha256": "94618a68e1def1afe7d10897333071c07027484f2c93d9ff2e9607e7946be8fb"
+    },
+    {
+      "file": "megc90n000eb.xml",
+      "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg016/megc90n000eb.xml",
+      "sha256": "845eda1aa007144821f3915e3c45dada4fbccb4f862de08f761c80406a156c28"
+    }
+  ],
+  "limitations": "Kilometer-scale gridded topography. Zero-count bins are interpolated, not direct laser observations. No local rock, sand, imagery, or EVA safety determination."
+}

@@ -1,0 +1,27 @@
+{
+  "product_id": "MEGT44N000HB",
+  "mission": "Mars Global Surveyor",
+  "instrument": "MOLA",
+  "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt44n000hb.img",
+  "label_url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt44n000hb.xml",
+  "source_resolution_pixels_per_degree": 128,
+  "source_nominal_resolution_m": 463.0576672,
+  "bbox": [
+    77.1484375,
+    18.28125,
+    77.7109375,
+    18.6171875
+  ],
+  "shape": [
+    43,
+    72
+  ],
+  "retrieved_byte_range": [
+    74856960,
+    75847679
+  ],
+  "stored_strip": "megt44n000hb_rows_3249_3292.bin",
+  "sha256": "c616a6406f3ff1a11849d04b7ecb816ebe2f7cb6332dc71e98fdec909ed4258e",
+  "role": "independent mission product displayed as coarse regional elevation context; not used for fine slope constraints",
+  "limitations": "MEGDR bins can be interpolated between laser tracks; source ~463 m. Not a 100 m measurement or independent validation of MOLA-controlled CTX DEM."
+}

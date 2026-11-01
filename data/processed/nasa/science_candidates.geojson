@@ -1,0 +1,259 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.43709897610921,
+          18.4811797752809
+        ]
+      },
+      "properties": {
+        "name": "Terrain inspection 01",
+        "classification": "DEM-derived investigation candidate; geological interpretation unconfirmed",
+        "source_product": "JEZ_ctx_B_soc_008_DTM_MOLAtopography_DeltaGeoid_20m_Eqc_latTs0_lon0",
+        "row": 70,
+        "col": 150,
+        "mean_slope_deg": 8.17,
+        "max_slope_deg": 19.96,
+        "elevation_m": -2481.0,
+        "relief_m": 4.48
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.39627986348123,
+          18.472752808988766
+        ]
+      },
+      "properties": {
+        "name": "Terrain inspection 02",
+        "classification": "DEM-derived investigation candidate; geological interpretation unconfirmed",
+        "source_product": "JEZ_ctx_B_soc_008_DTM_MOLAtopography_DeltaGeoid_20m_Eqc_latTs0_lon0",
+        "row": 75,
+        "col": 127,
+        "mean_slope_deg": 9.15,
+        "max_slope_deg": 16.66,
+        "elevation_m": -2453.04,
+        "relief_m": 3.82
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.41047781569966,
+          18.460955056179778
+        ]
+      },
+      "properties": {
+        "name": "Terrain inspection 03",
+        "classification": "DEM-derived investigation candidate; geological interpretation unconfirmed",
+        "source_product": "JEZ_ctx_B_soc_008_DTM_MOLAtopography_DeltaGeoid_20m_Eqc_latTs0_lon0",
+        "row": 82,
+        "col": 135,
+        "mean_slope_deg": 7.06,
+        "max_slope_deg": 18.92,
+        "elevation_m": -2479.28,
+        "relief_m": 2.99
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.41935153583617,
+          18.472752808988766
+        ]
+      },
+      "properties": {
+        "name": "Terrain inspection 04",
+        "classification": "DEM-derived investigation candidate; geological interpretation unconfirmed",
+        "source_product": "JEZ_ctx_B_soc_008_DTM_MOLAtopography_DeltaGeoid_20m_Eqc_latTs0_lon0",
+        "row": 75,
+        "col": 140,
+        "mean_slope_deg": 8.72,
+        "max_slope_deg": 14.07,
+        "elevation_m": -2460.2,
+        "relief_m": 2.89
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.46549488054607,
+          18.457584269662924
+        ]
+      },
+      "properties": {
+        "name": "Terrain inspection 05",
+        "classification": "DEM-derived investigation candidate; geological interpretation unconfirmed",
+        "source_product": "JEZ_ctx_B_soc_008_DTM_MOLAtopography_DeltaGeoid_20m_Eqc_latTs0_lon0",
+        "row": 84,
+        "col": 166,
+        "mean_slope_deg": 7.02,
+        "max_slope_deg": 12.36,
+        "elevation_m": -2574.41,
+        "relief_m": 2.37
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.43887372013651,
+          18.45926966292135
+        ]
+      },
+      "properties": {
+        "name": "Terrain inspection 06",
+        "classification": "DEM-derived investigation candidate; geological interpretation unconfirmed",
+        "source_product": "JEZ_ctx_B_soc_008_DTM_MOLAtopography_DeltaGeoid_20m_Eqc_latTs0_lon0",
+        "row": 83,
+        "col": 151,
+        "mean_slope_deg": 7.49,
+        "max_slope_deg": 11.13,
+        "elevation_m": -2550.78,
+        "relief_m": 2.36
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.43177474402731,
+          18.489606741573034
+        ]
+      },
+      "properties": {
+        "name": "Terrain inspection 07",
+        "classification": "DEM-derived investigation candidate; geological interpretation unconfirmed",
+        "source_product": "JEZ_ctx_B_soc_008_DTM_MOLAtopography_DeltaGeoid_20m_Eqc_latTs0_lon0",
+        "row": 65,
+        "col": 147,
+        "mean_slope_deg": 7.17,
+        "max_slope_deg": 19.09,
+        "elevation_m": -2542.58,
+        "relief_m": 2.33
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.40870307167235,
+          18.469382022471912
+        ]
+      },
+      "properties": {
+        "name": "Terrain inspection 08",
+        "classification": "DEM-derived investigation candidate; geological interpretation unconfirmed",
+        "source_product": "JEZ_ctx_B_soc_008_DTM_MOLAtopography_DeltaGeoid_20m_Eqc_latTs0_lon0",
+        "row": 77,
+        "col": 134,
+        "mean_slope_deg": 7.48,
+        "max_slope_deg": 15.07,
+        "elevation_m": -2490.5,
+        "relief_m": 2.22
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.39450511945392,
+          18.45926966292135
+        ]
+      },
+      "properties": {
+        "name": "Terrain inspection 09",
+        "classification": "DEM-derived investigation candidate; geological interpretation unconfirmed",
+        "source_product": "JEZ_ctx_B_soc_008_DTM_MOLAtopography_DeltaGeoid_20m_Eqc_latTs0_lon0",
+        "row": 83,
+        "col": 126,
+        "mean_slope_deg": 6.44,
+        "max_slope_deg": 18.64,
+        "elevation_m": -2465.69,
+        "relief_m": 2.1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.42467576791809,
+          18.46432584269663
+        ]
+      },
+      "properties": {
+        "name": "Terrain inspection 10",
+        "classification": "DEM-derived investigation candidate; geological interpretation unconfirmed",
+        "source_product": "JEZ_ctx_B_soc_008_DTM_MOLAtopography_DeltaGeoid_20m_Eqc_latTs0_lon0",
+        "row": 80,
+        "col": 143,
+        "mean_slope_deg": 7.62,
+        "max_slope_deg": 19.72,
+        "elevation_m": -2545.43,
+        "relief_m": 2.03
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.40337883959045,
+          18.479494382022473
+        ]
+      },
+      "properties": {
+        "name": "Terrain inspection 11",
+        "classification": "DEM-derived investigation candidate; geological interpretation unconfirmed",
+        "source_product": "JEZ_ctx_B_soc_008_DTM_MOLAtopography_DeltaGeoid_20m_Eqc_latTs0_lon0",
+        "row": 71,
+        "col": 131,
+        "mean_slope_deg": 5.3,
+        "max_slope_deg": 11.24,
+        "elevation_m": -2452.95,
+        "relief_m": 2.02
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.42822525597269,
+          18.47612359550562
+        ]
+      },
+      "properties": {
+        "name": "Terrain inspection 12",
+        "classification": "DEM-derived investigation candidate; geological interpretation unconfirmed",
+        "source_product": "JEZ_ctx_B_soc_008_DTM_MOLAtopography_DeltaGeoid_20m_Eqc_latTs0_lon0",
+        "row": 73,
+        "col": 145,
+        "mean_slope_deg": 7.89,
+        "max_slope_deg": 18.84,
+        "elevation_m": -2483.77,
+        "relief_m": 1.99
+      }
+    }
+  ],
+  "selection": "Known, unblocked cells with mean slope 5\u201312 degrees, within 18.425\u201318.50 N / 77.39\u201377.47 E; rank by Gaussian elevation residual; minimum 500 m spacing; at most 12",
+  "interpretation": "Candidate places to inspect terrain transitions, not validated outcrops, mineral detections, or reachable science detours."
+}
