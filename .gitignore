@@ -1,0 +1,25 @@
+# Downloaded originals are reproducible using data preparation scripts.
+/data/raw/
+
+# Local credentials and environments.
+.env
+.env.*
+!.env.example
+kaggle.json
+*.pem
+*.key
+.venv/
+venv/
+node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local backups and browser-generated previews.
+*.bak
+/*-preview.png
+playwright-report/
+test-results/
+*.log
+.DS_Store
+Thumbs.db

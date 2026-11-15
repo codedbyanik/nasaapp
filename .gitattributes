@@ -1,0 +1,6 @@
+# Keep bundled upstream bytes identical to their recorded checksums.
+assets/vendor/** -text
+data/processed/**/*.bin -text
+data/processed/**/*.png -text
+data/processed/**/*.jpg -text
+data/processed/**/*.tif -text
