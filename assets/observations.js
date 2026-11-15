@@ -34,6 +34,7 @@ function date(s){if(!s)return 'Not supplied';return new Date(s.length===10?s+'T0
 function create({map,planner:P,footprintLayer,onReviewChanged=()=>{}}){
  const $=id=>document.getElementById(id),markers=L.layerGroup().addTo(map),focus=L.layerGroup().addTo(map),images=new Map();
  let catalog=null,stops=[],extra=[],selected=null,route=null,version=0,view='ctx',widthM=1200,failed=false;
+ window.addEventListener('mars:panelchange',event=>{if(event.detail==='evidence'&&selected&&catalog&&!failed&&!P.dataset?.regional)renderImage();});
  const snapshot={get catalog(){return catalog;},setRoute,inspect,load,exportReview,focusCheckpoint(id){const c=stops.find(c=>c.id===id);if(c)select(c,true);}};
  $('checkpointList').addEventListener('click',event=>{const button=event.target.closest('[data-checkpoint]');if(button)select(stops.find(c=>c.id===button.dataset.checkpoint),true);});
  $('observationChoice').onchange=()=>{view=$('observationChoice').value;renderImage();};
@@ -58,7 +59,7 @@ function create({map,planner:P,footprintLayer,onReviewChanged=()=>{}}){
  }
  function inspect(p,title='Selected map location'){const key=p.map(n=>n.toFixed(5)).join(',');let c=extra.find(c=>c.id===key);if(!c){c={id:key,number:null,title,p:p.slice(),distance:null,prompt:'Inspect the surroundings at this coordinate. Observations are historical; coverage and small hazards need separate checks.',reviewed:false,note:''};extra.push(c);}select(c,true);}
  function select(c,move=false){
-  if(!c||failed)return;selected=c;version++;window._observationPoint=c.p.slice();
+  if(!c||failed)return;if(move)window.MarsWorkspace?.open('evidence');selected=c;version++;window._observationPoint=c.p.slice();
   if(!catalog){$('observationTitle').textContent='Loading observation evidence…';return;}
   if(P.dataset?.regional){
    $('observationContent').hidden=true;$('evidenceUnavailable').hidden=false;
@@ -76,7 +77,7 @@ function create({map,planner:P,footprintLayer,onReviewChanged=()=>{}}){
   const covering=matches(c.p,catalog);$('observationChoice').innerHTML='<option value="ctx">CTX · broad terrain context</option>'+covering.map(o=>`<option value="${esc(o.id)}">HiRISE · ${date(o.captured_start)}${o===covering[0]?' · newest in snapshot':''}</option>`).join('');
   view=covering.length?covering[0].id:'ctx';$('observationChoice').value=view;
   $('coverageNote').textContent=covering.length?`${covering.length} HiRISE catalog footprints cover this coordinate. Compare dates using the image selector.`:'No HiRISE match in this snapshot. CTX imagery covers the study area; this does not mean NASA has no other observations here.';
-  renderSurface(c);renderReview();renderImage();if(move)$('observationHeading').scrollIntoView({block:'start',behavior:'auto'});
+  renderSurface(c);renderReview();if(!document.getElementById('evidencePanel')?.hidden)renderImage();else $('imageCaption').textContent='Open Checkpoint evidence to load archived imagery.';if(move)$('observationHeading').scrollIntoView({block:'start',behavior:'auto'});
  }
  function renderReview(){
   $('checkpointList').innerHTML=stops.length?stops.map(c=>`<button class="checkpoint-button${selected?.id===c.id?' selected':''}" data-checkpoint="${c.id}" aria-pressed="${selected?.id===c.id}"><span>${c.reviewed?'✓':c.number}</span><strong>${esc(c.title)}</strong><small>${c.distance.toFixed(2)} km · ${c.reviewed?'review recorded':'inspect evidence'}</small></button>`).join(''):'<p class="hint">Checkpoints appear after planning.</p>';
