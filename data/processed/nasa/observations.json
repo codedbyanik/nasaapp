@@ -1,0 +1,466 @@
+{
+  "schema_version": 1,
+  "snapshot_utc": "2026-10-10T19:18:12.781305+00:00",
+  "scope": "Four curated HiRISE products and two published Perseverance panoramas. Not an exhaustive archive search; no claim of the latest NASA release.",
+  "coordinate_system": "Mars planetocentric latitude, east-positive longitude",
+  "ctx": {
+    "id": "JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0",
+    "mission": "Mars Reconnaissance Orbiter",
+    "instrument": "CTX",
+    "image": "data/processed/nasa/observations/ctx_detail.png",
+    "bbox": {
+      "lat0": 18.3,
+      "lat1": 18.6,
+      "lon0": 77.17,
+      "lon1": 77.69
+    },
+    "source_resolution_m": 6,
+    "preview_spacing_m": 6,
+    "shape": [
+      3125,
+      5138
+    ],
+    "captured_start": null,
+    "captured_end": null,
+    "capture_note": "Individual acquisition dates are not supplied by this mosaic label. The 2006\u20132020 range describes the input mission dataset, not this pixel.",
+    "published": "2020-07-24",
+    "source_url": "https://doi.org/10.5066/P9GV1ND3",
+    "label_url": "data/raw/nasa/JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0.xml",
+    "processing": "Bilinear reprojection to Mars Mercator; grayscale 2\u201398 percentile contrast stretch. No invented image detail.",
+    "preview_sha256": "d9deb25f1577dc3c753bca8900a990db5ebc10f859df7e8211e0885ac3b5515f"
+  },
+  "orbital": [
+    {
+      "id": "ESP_094047_1985",
+      "mission": "Mars Reconnaissance Orbiter",
+      "instrument": "HiRISE",
+      "title": "Jezero Crater",
+      "captured_start": "2026-08-19T13:11:17.970Z",
+      "captured_end": "2026-08-19T13:11:24.709Z",
+      "product_created": "2026-08-27T02:32:00Z",
+      "published": null,
+      "publication_note": "Public-release timestamp is not supplied by this product label.",
+      "source_resolution_m": 0.5,
+      "browse_ground_spacing_m": 3.7551690244877127,
+      "preview_spacing_m": 6,
+      "browse_shape": [
+        5662,
+        2048
+      ],
+      "bbox": {
+        "lat0": 18.3,
+        "lat1": 18.6,
+        "lon0": 77.17,
+        "lon1": 77.69
+      },
+      "image": "data/processed/nasa/observations/ESP_094047_1985.png",
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.4452,
+              18.6557
+            ],
+            [
+              77.4904,
+              18.3008
+            ],
+            [
+              77.3989,
+              18.2904
+            ],
+            [
+              77.3537,
+              18.6454
+            ],
+            [
+              77.4452,
+              18.6557
+            ]
+          ]
+        ]
+      },
+      "source_url": "https://www.uahirise.org/ESP_094047_1985",
+      "label_url": "https://hirise-pds.lpl.arizona.edu/PDS/RDR/ESP/ORB_094000_094099/ESP_094047_1985/ESP_094047_1985_RED.LBL",
+      "original_image_url": "https://hirise-pds.lpl.arizona.edu/PDS/EXTRAS/RDR/ESP/ORB_094000_094099/ESP_094047_1985/ESP_094047_1985_RED.browse.jpg",
+      "full_resolution_url": "https://hirise-pds.lpl.arizona.edu/PDS/RDR/ESP/ORB_094000_094099/ESP_094047_1985/ESP_094047_1985_RED.JP2",
+      "credit": "NASA/JPL-Caltech/UArizona",
+      "processing": "Official downsampled RED browse, georeferenced from PDS rectangular extrema and reprojected to a 6 m Mars Mercator preview; black padding transparent. The catalog polygon is rounded. Coverage does not prove visible detail at every pixel.",
+      "files": [
+        {
+          "url": "https://www.uahirise.org/ESP_094047_1985",
+          "file": "ESP_094047_1985.html",
+          "bytes": 23755,
+          "sha256": "a9d794a7f63151640444e801e5e0fbcc9e18f15181643f8ba1737efebcd4498b",
+          "cached_utc": "2026-10-10T19:02:41.636345+00:00"
+        },
+        {
+          "url": "https://hirise-pds.lpl.arizona.edu/PDS/RDR/ESP/ORB_094000_094099/ESP_094047_1985/ESP_094047_1985_RED.LBL",
+          "file": "ESP_094047_1985_RED.LBL",
+          "bytes": 8100,
+          "sha256": "a27e6c083b2d2d6b471683febd7369fa9ba70ebffaf6d61554275ca14f00b8ae",
+          "cached_utc": "2026-10-10T19:05:41.037446+00:00"
+        },
+        {
+          "url": "https://hirise-pds.lpl.arizona.edu/PDS/EXTRAS/RDR/ESP/ORB_094000_094099/ESP_094047_1985/ESP_094047_1985_RED.browse.jpg",
+          "file": "ESP_094047_1985_RED.browse.jpg",
+          "bytes": 3170014,
+          "sha256": "3fb78182b112f743954d3d16d8d0252f8ce209755b18db9af11b9dbf9991eb7f",
+          "cached_utc": "2026-10-10T19:05:58.226129+00:00"
+        },
+        {
+          "url": "https://hirise-pds.lpl.arizona.edu/PDS/RDR/ESP/ORB_094000_094099/ESP_094047_1985/ESP_094047_1985_RED.JP2",
+          "file": "ESP_094047_1985_RED.JP2",
+          "bytes": 349987818,
+          "sha256": "9102934400c170fde4de9e79d73a86e0df0fc27337d6689ef0a0e4cd91cf49a3",
+          "cached_utc": "2026-10-10T19:17:12.952322+00:00"
+        }
+      ],
+      "detail": {
+        "image": "data/processed/nasa/observations/ESP_094047_1985_detail.png",
+        "bbox": {
+          "lat0": 18.427,
+          "lat1": 18.5,
+          "lon0": 77.4,
+          "lon1": 77.475
+        },
+        "preview_spacing_m": 1,
+        "shape": [
+          4562,
+          4446
+        ],
+        "sha256": "52b493e94b80783a40a6053e32227376251ba474926273fbc7c2aeee63eff3ad",
+        "processing": "Actual 0.5 m PDS JP2 read at ~1 m sampling, reprojected to 1 m Mars Mercator pixels; grayscale 2\u201398 percentile stretch. Invalid/zero padding is transparent. No synthetic detail."
+      },
+      "preview_sha256": "de19fe97cd7a2103524875cb2f67c6ed0d13a61e3716072c2c589254f30ccc25"
+    },
+    {
+      "id": "ESP_093981_1985",
+      "mission": "Mars Reconnaissance Orbiter",
+      "instrument": "HiRISE",
+      "title": "Jezero Crater",
+      "captured_start": "2026-08-14T09:44:51.693Z",
+      "captured_end": "2026-08-14T09:44:58.655Z",
+      "product_created": "2026-08-20T20:56:32Z",
+      "published": null,
+      "publication_note": "Public-release timestamp is not supplied by this product label.",
+      "source_resolution_m": 0.5,
+      "browse_ground_spacing_m": 3.9902595514797197,
+      "preview_spacing_m": 6,
+      "browse_shape": [
+        5527,
+        2048
+      ],
+      "bbox": {
+        "lat0": 18.3,
+        "lat1": 18.6,
+        "lon0": 77.17,
+        "lon1": 77.69
+      },
+      "image": "data/processed/nasa/observations/ESP_093981_1985.png",
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.4455,
+              18.659
+            ],
+            [
+              77.4942,
+              18.292
+            ],
+            [
+              77.3983,
+              18.2801
+            ],
+            [
+              77.3489,
+              18.647
+            ],
+            [
+              77.4455,
+              18.659
+            ]
+          ]
+        ]
+      },
+      "source_url": "https://www.uahirise.org/ESP_093981_1985",
+      "label_url": "https://hirise-pds.lpl.arizona.edu/PDS/RDR/ESP/ORB_093900_093999/ESP_093981_1985/ESP_093981_1985_RED.LBL",
+      "original_image_url": "https://hirise-pds.lpl.arizona.edu/PDS/EXTRAS/RDR/ESP/ORB_093900_093999/ESP_093981_1985/ESP_093981_1985_RED.browse.jpg",
+      "full_resolution_url": "https://hirise-pds.lpl.arizona.edu/PDS/RDR/ESP/ORB_093900_093999/ESP_093981_1985/ESP_093981_1985_RED.JP2",
+      "credit": "NASA/JPL-Caltech/UArizona",
+      "processing": "Official downsampled RED browse, georeferenced from PDS rectangular extrema and reprojected to a 6 m Mars Mercator preview; black padding transparent. The catalog polygon is rounded. Coverage does not prove visible detail at every pixel.",
+      "files": [
+        {
+          "url": "https://www.uahirise.org/ESP_093981_1985",
+          "file": "ESP_093981_1985.html",
+          "bytes": 23753,
+          "sha256": "77c52c58e31f54db54fa365f76f3100e7fe8b54d40956b71febc876d31d1d014",
+          "cached_utc": "2026-10-10T19:06:04.694398+00:00"
+        },
+        {
+          "url": "https://hirise-pds.lpl.arizona.edu/PDS/RDR/ESP/ORB_093900_093999/ESP_093981_1985/ESP_093981_1985_RED.LBL",
+          "file": "ESP_093981_1985_RED.LBL",
+          "bytes": 8101,
+          "sha256": "8b06d9e4ba343692c71789a24376974fc6ebafcb11d0b46408ddf667489dc5cd",
+          "cached_utc": "2026-10-10T19:06:06.190785+00:00"
+        },
+        {
+          "url": "https://hirise-pds.lpl.arizona.edu/PDS/EXTRAS/RDR/ESP/ORB_093900_093999/ESP_093981_1985/ESP_093981_1985_RED.browse.jpg",
+          "file": "ESP_093981_1985_RED.browse.jpg",
+          "bytes": 3112681,
+          "sha256": "be4b4f69d84c1612fe1cffcff6dca65b631707179e255b99a5dec05f0f9d1959",
+          "cached_utc": "2026-10-10T19:06:33.385008+00:00"
+        }
+      ],
+      "preview_sha256": "ee8761fe95658fc853050597959ce6eaa4a176aa0fa92c5a9b1ce4c1c18fa40c"
+    },
+    {
+      "id": "ESP_073068_1985",
+      "mission": "Mars Reconnaissance Orbiter",
+      "instrument": "HiRISE",
+      "title": "Monitor Perseverance Rover",
+      "captured_start": "2022-02-26T19:26:31.067Z",
+      "captured_end": "2022-02-26T19:26:33.785Z",
+      "product_created": "2022-03-03T01:27:44Z",
+      "published": null,
+      "publication_note": "Public-release timestamp is not supplied by this product label.",
+      "source_resolution_m": 0.25,
+      "browse_ground_spacing_m": 2.9659380997472997,
+      "preview_spacing_m": 6,
+      "browse_shape": [
+        2981,
+        2048
+      ],
+      "bbox": {
+        "lat0": 18.3,
+        "lat1": 18.6,
+        "lon0": 77.17,
+        "lon1": 77.69
+      },
+      "image": "data/processed/nasa/observations/ESP_073068_1985.png",
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.4798,
+              18.503
+            ],
+            [
+              77.4979,
+              18.3616
+            ],
+            [
+              77.4081,
+              18.3511
+            ],
+            [
+              77.3899,
+              18.4926
+            ],
+            [
+              77.4798,
+              18.503
+            ]
+          ]
+        ]
+      },
+      "source_url": "https://www.uahirise.org/ESP_073068_1985",
+      "label_url": "https://hirise-pds.lpl.arizona.edu/PDS/RDR/ESP/ORB_073000_073099/ESP_073068_1985/ESP_073068_1985_RED.LBL",
+      "original_image_url": "https://hirise-pds.lpl.arizona.edu/PDS/EXTRAS/RDR/ESP/ORB_073000_073099/ESP_073068_1985/ESP_073068_1985_RED.browse.jpg",
+      "full_resolution_url": "https://hirise-pds.lpl.arizona.edu/PDS/RDR/ESP/ORB_073000_073099/ESP_073068_1985/ESP_073068_1985_RED.JP2",
+      "credit": "NASA/JPL-Caltech/UArizona",
+      "processing": "Official downsampled RED browse, georeferenced from PDS rectangular extrema and reprojected to a 6 m Mars Mercator preview; black padding transparent. The catalog polygon is rounded. Coverage does not prove visible detail at every pixel.",
+      "files": [
+        {
+          "url": "https://www.uahirise.org/ESP_073068_1985",
+          "file": "ESP_073068_1985.html",
+          "bytes": 24707,
+          "sha256": "0c74ff89f1d60ba93b6c1fc2fdf99c43d46c2e133c2fb51b63173d21914a3cd2",
+          "cached_utc": "2026-10-10T19:06:38.610373+00:00"
+        },
+        {
+          "url": "https://hirise-pds.lpl.arizona.edu/PDS/RDR/ESP/ORB_073000_073099/ESP_073068_1985/ESP_073068_1985_RED.LBL",
+          "file": "ESP_073068_1985_RED.LBL",
+          "bytes": 8079,
+          "sha256": "e7ca94ef673df48300044ef93b41fd9c236d535ffae457954743c0b98c718a01",
+          "cached_utc": "2026-10-10T19:06:40.014612+00:00"
+        },
+        {
+          "url": "https://hirise-pds.lpl.arizona.edu/PDS/EXTRAS/RDR/ESP/ORB_073000_073099/ESP_073068_1985/ESP_073068_1985_RED.browse.jpg",
+          "file": "ESP_073068_1985_RED.browse.jpg",
+          "bytes": 1762794,
+          "sha256": "5fa518d08221b1a77cff8a9b5d2a32a3be0bd892de9557a325abe7840f3aa4b2",
+          "cached_utc": "2026-10-10T19:06:56.140232+00:00"
+        }
+      ],
+      "preview_sha256": "a17a1cbf0381708fac32c38a9aff6dd0cc81ac96f51ac402a8cf2c6c46a1c784"
+    },
+    {
+      "id": "ESP_073912_1985",
+      "mission": "Mars Reconnaissance Orbiter",
+      "instrument": "HiRISE",
+      "title": "Perseverance landing site in Jezero Crater",
+      "captured_start": "2022-05-03T13:41:54.057Z",
+      "captured_end": "2022-05-03T13:41:58.565Z",
+      "product_created": "2022-05-12T02:19:02Z",
+      "published": null,
+      "publication_note": "Public-release timestamp is not supplied by this product label.",
+      "source_resolution_m": 0.25,
+      "browse_ground_spacing_m": 1.3936733882117072,
+      "preview_spacing_m": 6,
+      "browse_shape": [
+        9980,
+        2048
+      ],
+      "bbox": {
+        "lat0": 18.3,
+        "lat1": 18.6,
+        "lon0": 77.17,
+        "lon1": 77.69
+      },
+      "image": "data/processed/nasa/observations/ESP_073912_1985.png",
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.3864,
+              18.5818
+            ],
+            [
+              77.4167,
+              18.3452
+            ],
+            [
+              77.3962,
+              18.3429
+            ],
+            [
+              77.3659,
+              18.5795
+            ],
+            [
+              77.3864,
+              18.5818
+            ]
+          ]
+        ]
+      },
+      "source_url": "https://www.uahirise.org/ESP_073912_1985",
+      "label_url": "https://hirise-pds.lpl.arizona.edu/PDS/RDR/ESP/ORB_073900_073999/ESP_073912_1985/ESP_073912_1985_RED.LBL",
+      "original_image_url": "https://hirise-pds.lpl.arizona.edu/PDS/EXTRAS/RDR/ESP/ORB_073900_073999/ESP_073912_1985/ESP_073912_1985_RED.browse.jpg",
+      "full_resolution_url": "https://hirise-pds.lpl.arizona.edu/PDS/RDR/ESP/ORB_073900_073999/ESP_073912_1985/ESP_073912_1985_RED.JP2",
+      "credit": "NASA/JPL-Caltech/UArizona",
+      "processing": "Official downsampled RED browse, georeferenced from PDS rectangular extrema and reprojected to a 6 m Mars Mercator preview; black padding transparent. The catalog polygon is rounded. Coverage does not prove visible detail at every pixel.",
+      "files": [
+        {
+          "url": "https://www.uahirise.org/ESP_073912_1985",
+          "file": "ESP_073912_1985.html",
+          "bytes": 23313,
+          "sha256": "1d3491002209a405ef32e30d7b83580b899747ffd1491e64618db6d0307483c4",
+          "cached_utc": "2026-10-10T19:07:02.302644+00:00"
+        },
+        {
+          "url": "https://hirise-pds.lpl.arizona.edu/PDS/RDR/ESP/ORB_073900_073999/ESP_073912_1985/ESP_073912_1985_RED.LBL",
+          "file": "ESP_073912_1985_RED.LBL",
+          "bytes": 7668,
+          "sha256": "3a6174eebb43d3ee21d6893c12eb917702c90038f12ea9b73be6d7cf80bcbc26",
+          "cached_utc": "2026-10-10T19:07:04.217627+00:00"
+        },
+        {
+          "url": "https://hirise-pds.lpl.arizona.edu/PDS/EXTRAS/RDR/ESP/ORB_073900_073999/ESP_073912_1985/ESP_073912_1985_RED.browse.jpg",
+          "file": "ESP_073912_1985_RED.browse.jpg",
+          "bytes": 4097374,
+          "sha256": "83c4d21a2f7aadf7662632940e364365bbb53867c6e4a45f1da747f2326db2cd",
+          "cached_utc": "2026-10-10T19:07:27.753695+00:00"
+        }
+      ],
+      "preview_sha256": "3a3511322d5720adc37155610f722965bce2902141e24fab7bc7c5a75b3c68f1"
+    }
+  ],
+  "surface": [
+    {
+      "id": "PIA24264",
+      "mission": "Mars 2020 Perseverance",
+      "instrument": "Mastcam-Z",
+      "title": "First view from the landing site",
+      "capture_dates": [
+        "2021-02-21"
+      ],
+      "published": "2021-02-24",
+      "association": "landing_site",
+      "coordinate": [
+        18.44463,
+        77.45088
+      ],
+      "coordinate_note": "Landing-site association, not a surveyed camera position.",
+      "source_url": "https://www.jpl.nasa.gov/images/pia24264-mastcam-zs-first-360-degree-panorama/",
+      "image": "data/processed/nasa/observations/PIA24264.jpg",
+      "original_image_url": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA24264.jpg",
+      "original_dimensions": [
+        9238,
+        2451
+      ],
+      "preview_dimensions": [
+        9238,
+        2451
+      ],
+      "color_processing": "Published color mosaic",
+      "credit": "NASA/JPL-Caltech/ASU/MSSS",
+      "files": [
+        {
+          "url": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA24264.jpg",
+          "file": "PIA24264.jpg",
+          "bytes": 2729297,
+          "sha256": "2b9e68c713700bc713dea9ce532e10bb0889061b7374575bee8a1d95791f48a2",
+          "cached_utc": "2026-10-10T19:07:33.716676+00:00"
+        }
+      ],
+      "preview_sha256": "c7e884e6ad8d2a7c1276ac0affda453e7f1b39571c0fc3af79c80bc114edf959"
+    },
+    {
+      "id": "PIA24921",
+      "mission": "Mars 2020 Perseverance",
+      "instrument": "Mastcam-Z",
+      "title": "Jezero delta panorama",
+      "capture_dates": [
+        "2022-06-12",
+        "2022-06-13",
+        "2022-06-16",
+        "2022-06-17",
+        "2022-06-20"
+      ],
+      "published": "2022-09-14",
+      "association": "regional_context",
+      "coordinate": null,
+      "coordinate_note": "NASA identifies the delta region; camera coordinates are not supplied here. Not attached to an exact checkpoint.",
+      "source_url": "https://www.jpl.nasa.gov/images/pia24921-detailed-panorama-of-mars-jezero-crater-delta/",
+      "image": "data/processed/nasa/observations/PIA24921.jpg",
+      "original_image_url": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA24921.jpg",
+      "original_dimensions": [
+        29163,
+        8182
+      ],
+      "preview_dimensions": [
+        10000,
+        2806
+      ],
+      "color_processing": "Enhanced color",
+      "credit": "NASA/JPL-Caltech/ASU/MSSS",
+      "files": [
+        {
+          "url": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA24921.jpg",
+          "file": "PIA24921.jpg",
+          "bytes": 26184264,
+          "sha256": "8efa813209bbb94a282f665179430a11c8be6d6c07fea7dfea0b2355f2620eb6",
+          "cached_utc": "2026-10-10T19:07:43.201882+00:00"
+        }
+      ],
+      "preview_sha256": "55e56d1cd039a478214605c9dbdb6537ea8c3f5f77fff3526f3f5d0f01bba40c"
+    }
+  ]
+}

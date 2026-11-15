@@ -1,0 +1,13 @@
+{
+  "method": "heuristic rule-based (features documented above); DL training in colab/",
+  "n": 10,
+  "distribution": {
+    "soil": 1,
+    "bedrock": 0,
+    "sand": 9,
+    "big_rock": 0
+  },
+  "stability_raw_vs_equalized": "8/10",
+  "likely_failure": "NRF_1699_0817769503_816ECM_N0814492NCAM02699_01_195J01.png (high edge, check for rock confusion)",
+  "limitations": "no crowdsourced labels locally; sand<->soil confusion expected under dust; penalties are planning priors, not validated mobility model"
+}

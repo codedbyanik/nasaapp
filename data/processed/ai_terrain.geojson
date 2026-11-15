@@ -1,0 +1,85 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "cls": "sand",
+        "penalty": 0.9,
+        "src": "kaggle:terrain-binary + heuristic v1",
+        "img": "NLF_1699_0817769320_881ECM_N0814492NCAM02699_10_195J01.png"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.43,
+          18.465
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cls": "sand",
+        "penalty": 0.9,
+        "src": "kaggle:terrain-binary + heuristic v1",
+        "img": "NLF_1699_0817769503_816ECM_N0814492NCAM02699_01_195J01.png"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.5,
+          18.445
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cls": "sand",
+        "penalty": 0.9,
+        "src": "kaggle:terrain-binary + heuristic v1",
+        "img": "NLF_1699_0817769503_816ECM_N0814492NCAM02699_07_195J01.png"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.447,
+          18.455
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cls": "sand",
+        "penalty": 0.9,
+        "src": "kaggle:terrain-binary + heuristic v1",
+        "img": "NLF_1699_0817769503_816ECM_N0814492NCAM02699_10_195J01.png"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.47,
+          18.47
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cls": "soil",
+        "penalty": 0.2,
+        "src": "kaggle:terrain-binary + heuristic v1",
+        "img": "NLG_1699_0817770969_387ECM_N0814492NCAM00500_00_2I4J01.png"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.41,
+          18.45
+        ]
+      }
+    }
+  ]
+}
