@@ -34,7 +34,7 @@ function date(s){if(!s)return 'Not supplied';return new Date(s.length===10?s+'T0
 function create({map,planner:P,footprintLayer,onReviewChanged=()=>{}}){
  const $=id=>document.getElementById(id),markers=L.layerGroup().addTo(map),focus=L.layerGroup().addTo(map),images=new Map();
  let catalog=null,stops=[],extra=[],selected=null,route=null,version=0,view='ctx',widthM=1200,failed=false;
- const snapshot={get catalog(){return catalog;},setRoute,inspect,load,exportReview};
+ const snapshot={get catalog(){return catalog;},setRoute,inspect,load,exportReview,focusCheckpoint(id){const c=stops.find(c=>c.id===id);if(c)select(c,true);}};
  $('checkpointList').addEventListener('click',event=>{const button=event.target.closest('[data-checkpoint]');if(button)select(stops.find(c=>c.id===button.dataset.checkpoint),true);});
  $('observationChoice').onchange=()=>{view=$('observationChoice').value;renderImage();};
  $('contextWidth').onchange=()=>{widthM=Number($('contextWidth').value);renderImage();};
@@ -63,7 +63,7 @@ function create({map,planner:P,footprintLayer,onReviewChanged=()=>{}}){
   if(P.dataset?.regional){
    $('observationContent').hidden=true;$('evidenceUnavailable').hidden=false;
    const cell=P.sample(c.p);$('observationTitle').textContent=c.title;
-   $('evidenceUnavailable').textContent=cell?.known?`MOLA regional evidence: elevation ${cell.elevation.toFixed(0)} m; coarse slope ${cell.slope.toFixed(2)} degrees; ${cell.observationCount} laser measurements in this bin${cell.observationCount===0?' (interpolated elevation)':''}. Source: MEGT90N000EB / MEGC90N000EB, acquired 1997-2001; product created April 2003. ~3.7 km cells. The colored map is topography, not a photograph. Regional mode uses topography evidence; the photographic catalog is limited to Jezero. Detailed terrain and image surveys are required before evaluating a Marswalk.`:'Outside loaded MOLA terrain. Load a region around this location.';
+   $('evidenceUnavailable').textContent=cell?.known?`MOLA regional evidence: elevation ${cell.elevation.toFixed(0)} m; coarse slope ${cell.slope.toFixed(2)} degrees; ${cell.observationCount} laser measurements in this bin${cell.observationCount===0?' (interpolated elevation)':''}. Source: MEGT90N000EB / MEGC90N000EB, acquired 1997-2001; product created April 2003. ~3.7 km cells. The colored map is topography, not a photograph. The checkpoint photo catalog is limited to Jezero; 3D also offers a global CTX orbital mosaic for regional visual context. Imagery does not refine the MOLA terrain. Detailed terrain and image surveys are required before evaluating a Marswalk.`:'Outside loaded MOLA terrain. Load a region around this location.';
    renderReview();if(move)$('observationHeading').scrollIntoView({block:'start',behavior:'auto'});return;
   }
   focus.clearLayers();L.circleMarker(c.p,{radius:16,color:'#ec986e',weight:2,fillOpacity:0,bubblingMouseEvents:false}).addTo(focus);if(move)map.panTo(c.p);

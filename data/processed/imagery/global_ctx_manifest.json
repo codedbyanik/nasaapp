@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "product": "Murray Lab Global CTX Mosaic V01",
+  "source_resolution_m": 5,
+  "release_year": 2023,
+  "capture_note": "Multi-orbit mosaic; no single capture date. Per-point acquisition metadata are not ingested.",
+  "service_url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer",
+  "spatial_reference": 104971,
+  "projection": "geographic Mars 2000 sphere, east-positive -180..180",
+  "tile_pixels": 512,
+  "origin_lon": -180,
+  "origin_lat": 90,
+  "level0_resolution_deg": 0.3515625,
+  "credit": "NASA/JPL/MSSS/Caltech Murray Lab; streamed service by Esri",
+  "source_url": "https://murray-lab.caltech.edu/CTX/V01/TilePages/",
+  "publication_doi": "https://doi.org/10.1029/2024EA003555",
+  "archive_doi": "https://doi.org/10.17189/m23v-ae12",
+  "license_note": "Caltech Murray Lab grants free use of V01 for all purposes with NASA/JPL/MSSS/The Murray Lab credit. The hosted service also has Esri terms.",
+  "service_terms_url": "https://www.arcgis.com/home/item.html?id=30c4acfe36284b1784bf07d5d73f9e4d",
+  "presets": {
+    "gale": {
+      "lat0": -8.4375,
+      "lat1": -2.375,
+      "lon0": 134.75,
+      "lon1": 140.8125
+    },
+    "olympus": {
+      "lat0": 15.625,
+      "lat1": 21.6875,
+      "lon0": -136.8125,
+      "lon1": -130.75
+    }
+  },
+  "tiles": {
+    "6_24_15": {
+      "file": "ctx_tiles/6_24_15.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/24/15",
+      "sha256": "4dc303ff09107317a699ac8972f56c8f480f08877ab99db75c12e0c630c9dff1",
+      "source_sha256": "4dc303ff09107317a699ac8972f56c8f480f08877ab99db75c12e0c630c9dff1",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_24_16": {
+      "file": "ctx_tiles/6_24_16.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/24/16",
+      "sha256": "fa2fc2e817c8744f594a417d17f8e4eb06c81d7bdab3184b42a56831251dcf37",
+      "source_sha256": "d14e0061ea10c0d5ee147e1f788fa91c5b2974f6be659cd23ae72466807f2535",
+      "source_format": "JPEG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_24_17": {
+      "file": "ctx_tiles/6_24_17.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/24/17",
+      "sha256": "486d372877e8bda5ec4a0725397e7c840c1786975e47f0877caa99b367d088ac",
+      "source_sha256": "486d372877e8bda5ec4a0725397e7c840c1786975e47f0877caa99b367d088ac",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_25_15": {
+      "file": "ctx_tiles/6_25_15.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/25/15",
+      "sha256": "4496133d1b4b0ebadbb4a55b3640a6222bff6960e8deb58cabbe6a9d31b1e476",
+      "source_sha256": "4496133d1b4b0ebadbb4a55b3640a6222bff6960e8deb58cabbe6a9d31b1e476",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_25_16": {
+      "file": "ctx_tiles/6_25_16.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/25/16",
+      "sha256": "fb3246aac79950fc43d805ee0c925b9eff36f7f25296b96d6d48b1705d9943d2",
+      "source_sha256": "fb3246aac79950fc43d805ee0c925b9eff36f7f25296b96d6d48b1705d9943d2",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_25_17": {
+      "file": "ctx_tiles/6_25_17.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/25/17",
+      "sha256": "faa3bbf3c9d963e63b1e94e9c1d9732c1db664cd321708a117960a7900c73a87",
+      "source_sha256": "faa3bbf3c9d963e63b1e94e9c1d9732c1db664cd321708a117960a7900c73a87",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_26_15": {
+      "file": "ctx_tiles/6_26_15.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/26/15",
+      "sha256": "902f77dd70ca01c5fab298dfe9b2e51d2058f257402f13977abc5a5392fa7ec5",
+      "source_sha256": "902f77dd70ca01c5fab298dfe9b2e51d2058f257402f13977abc5a5392fa7ec5",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_26_16": {
+      "file": "ctx_tiles/6_26_16.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/26/16",
+      "sha256": "f1f5033492552f6da2456339faa951bce28deb1a140bf19bbe2eadf5b300b52e",
+      "source_sha256": "89e69406c66535c5b7044e32d640120d43c4bab3f0136eef78ad8b8d46801f18",
+      "source_format": "JPEG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_26_17": {
+      "file": "ctx_tiles/6_26_17.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/26/17",
+      "sha256": "37cc88bbbb6351e26d2e314f3060450322363a60eb716b5998b12048ca393188",
+      "source_sha256": "37cc88bbbb6351e26d2e314f3060450322363a60eb716b5998b12048ca393188",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_32_111": {
+      "file": "ctx_tiles/6_32_111.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/32/111",
+      "sha256": "8399b4ef170684c143aa6cfd73dd0a5f7bcb426ac23140c0bbf78dd173f8e7ad",
+      "source_sha256": "8399b4ef170684c143aa6cfd73dd0a5f7bcb426ac23140c0bbf78dd173f8e7ad",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_32_112": {
+      "file": "ctx_tiles/6_32_112.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/32/112",
+      "sha256": "cef5d0ea89aeacaf02a322f2a652ff53de21febfe7ea7116f50a27cc04cef05e",
+      "source_sha256": "cef5d0ea89aeacaf02a322f2a652ff53de21febfe7ea7116f50a27cc04cef05e",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_32_113": {
+      "file": "ctx_tiles/6_32_113.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/32/113",
+      "sha256": "ed0c74ac6998257b9676b405823cfdbdce5b0d5e6f644c0988a70c44232877f5",
+      "source_sha256": "ed0c74ac6998257b9676b405823cfdbdce5b0d5e6f644c0988a70c44232877f5",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_32_114": {
+      "file": "ctx_tiles/6_32_114.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/32/114",
+      "sha256": "f84ae7ec6c3e5e65116f59884b8159d420bf2b85cb9e791bffbf72bb7cd9bd19",
+      "source_sha256": "f84ae7ec6c3e5e65116f59884b8159d420bf2b85cb9e791bffbf72bb7cd9bd19",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_33_111": {
+      "file": "ctx_tiles/6_33_111.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/33/111",
+      "sha256": "923201eeb7bc127b2ccd6920886609a308df70a37c1801b44e8363dc1c68752a",
+      "source_sha256": "923201eeb7bc127b2ccd6920886609a308df70a37c1801b44e8363dc1c68752a",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_33_112": {
+      "file": "ctx_tiles/6_33_112.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/33/112",
+      "sha256": "1168f0643edf51b6fe34c5310e11c7fc19ba6b62fd19a4779b4fab94c5ff5a06",
+      "source_sha256": "1168f0643edf51b6fe34c5310e11c7fc19ba6b62fd19a4779b4fab94c5ff5a06",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_33_113": {
+      "file": "ctx_tiles/6_33_113.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/33/113",
+      "sha256": "2aa7a37b7becb701ddcb993e436ca419fdc32e9ca76ceee11ff5aaf3368c2ed3",
+      "source_sha256": "2aa7a37b7becb701ddcb993e436ca419fdc32e9ca76ceee11ff5aaf3368c2ed3",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_33_114": {
+      "file": "ctx_tiles/6_33_114.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/33/114",
+      "sha256": "f3faada74d1e1903f2b9570fa79ebae3f952f6f8f05c68bbd0c2f0aae063edb8",
+      "source_sha256": "f3faada74d1e1903f2b9570fa79ebae3f952f6f8f05c68bbd0c2f0aae063edb8",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_34_111": {
+      "file": "ctx_tiles/6_34_111.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/34/111",
+      "sha256": "7b887307a67d4e6db8e5375444d8a5385e951405dedd6b702f8864ea7325144c",
+      "source_sha256": "7b887307a67d4e6db8e5375444d8a5385e951405dedd6b702f8864ea7325144c",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_34_112": {
+      "file": "ctx_tiles/6_34_112.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/34/112",
+      "sha256": "994e01b25e1bfb79d27aae29411cfb801c058421671e2c96294e4bd568428e72",
+      "source_sha256": "994e01b25e1bfb79d27aae29411cfb801c058421671e2c96294e4bd568428e72",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_34_113": {
+      "file": "ctx_tiles/6_34_113.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/34/113",
+      "sha256": "60b0eebfac4d1ee1c138d32820ca74f6733948c1f19392bda51e5beceb05ea55",
+      "source_sha256": "60b0eebfac4d1ee1c138d32820ca74f6733948c1f19392bda51e5beceb05ea55",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    },
+    "6_34_114": {
+      "file": "ctx_tiles/6_34_114.png",
+      "url": "https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX1/MapServer/tile/6/34/114",
+      "sha256": "28d09f5ee80ea3ebe31c067dc7d347b04576d48ec7dca5212a95d8d950a1e837",
+      "source_sha256": "28d09f5ee80ea3ebe31c067dc7d347b04576d48ec7dca5212a95d8d950a1e837",
+      "source_format": "PNG",
+      "processing": "Source PNG retained or decoded service image losslessly encoded to PNG."
+    }
+  }
+}

@@ -2,7 +2,7 @@
 window.MarsRegions={async load(lat,lon,extent){
  if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>80)throw Error('Choose a center between 80 degrees S and 80 degrees N; polar planning needs a different projection.');
  lon=((lon+180)%360+360)%360-180;
- const get=async u=>{const r=await fetch(u);if(!r.ok)throw Error('Global MOLA data unavailable.');return r;};
+ const get=async u=>{try{const r=await fetch(u);if(!r.ok)throw Error('HTTP '+r.status);return r;}catch{throw Error('Global MOLA data unavailable. Check the local data files and connection.');}};
  const meta=await (await get('data/processed/global/manifest.json')).json(),ppd=meta.pixels_per_degree;
  const r0=Math.max(80,Math.floor((90-lat-extent/2)*ppd)),r1=Math.min(2800,Math.ceil((90-lat+extent/2)*ppd));
  const c0=Math.floor((lon-extent/2)*ppd),c1=Math.ceil((lon+extent/2)*ppd),rows=r1-r0,cols=c1-c0,tiles=new Map();
