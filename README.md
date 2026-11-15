@@ -10,7 +10,13 @@ This is an independent hackathon prototype, not an official NASA application or 
 
 Prepared browser assets, regional MOLA tiles, source manifests, and download scripts are included. Large original downloads in `data/raw/`, local credentials, backups, and generated preview screenshots are excluded from Git. Nothing is removed from an existing local working copy.
 
-After a fresh clone, the prepared app runs without downloading the raw products. To reproduce the processing or run source-hash science tests, first run the preparation commands below, plus `python -B data/prepare_global.py` for the global MOLA originals. References below to cached originals describe the development working copy; a fresh clone needs those downloads. The original page backup is also local only.
+After a fresh clone, the prepared app runs without downloading the raw products. To reproduce the processing or run source-hash science tests, first run the preparation commands below, plus `python -B scripts/data/prepare_global.py` for the global MOLA originals. References below to cached originals describe the development working copy; a fresh clone needs those downloads. The original page backup is also local only.
+
+## Project structure
+
+Application source is organized by responsibility in `src/core/`, `src/features/`, `src/terrain/`, `src/ui/` and `src/styles/`. Licensed static dependencies remain under `assets/vendor/`; the optional Flask service is in `backend/`. Data preparation lives in `scripts/data/`, scientific evaluation in `scripts/evaluation/`, and prepared products in `data/processed/`. Tests are grouped into `unit`, `browser`, `backend`, `science` and `helpers`.
+
+See [Architecture and directory guide](docs/ARCHITECTURE.md) for the complete tree and deployment boundaries. From the repository root, use `npm ci`, `npm start`, `npm test`, `npm run test:browser`, and `npm run test:backend`. Vercel continues to serve the root `index.html` with the same dataset URLs.
 
 ## Run the prepared app
 
@@ -40,19 +46,19 @@ Source links, hashes, methods, assumptions, and downloadable results appear in *
 ## Reproduce the science
 
 ```powershell
-python -m pip install -r data/requirements.txt
-python -B data/prepare_nasa.py
-python -B data/download_hirise_detail.py
-python -B data/prepare_observations.py
-node experiments/evaluate_routes.cjs
-python -B experiments/plot_analysis.py
+python -m pip install -r scripts/data/requirements.txt
+python -B scripts/data/prepare_nasa.py
+python -B scripts/data/download_hirise_detail.py
+python -B scripts/data/prepare_observations.py
+node scripts/evaluation/evaluate_routes.cjs
+python -B scripts/evaluation/plot_analysis.py
 ```
 
 The preparation downloads and caches two official USGS GeoTIFFs and their metadata (~46 MB combined) and a documented MOLA byte-range strip (~1 MB). Original files stay in `data/raw/nasa`; derivatives and browser assets stay in `data/processed/nasa`.
 
 The observation preparation adds four official HiRISE browse products/labels and two NASA-linked rover panoramas. A **~334 MB official 0.5 m HiRISE JP2** supplies a local **1 m detail preview** in the demo corridor; it is already cached. `download_hirise_detail.py` validates ranged responses and can resume an interrupted download. Outside that detailed corridor or in older observations, the interface explicitly shows a 6 m projected browse preview. No AI-generated imagery is used.
 
-The evaluation creates `comparison_report.json`, `route_comparison.csv`, and shareable plots. It tests three fixed corridors and weight sensitivity. `python -B experiments/run_compare.py` is a compatibility entry point for the same real-data evaluation.
+The evaluation creates `comparison_report.json`, `route_comparison.csv`, and shareable plots. It tests three fixed corridors and weight sensitivity. `python -B scripts/evaluation/run_compare.py` is a compatibility entry point for the same real-data evaluation.
 
 ## Demo
 
@@ -67,13 +73,13 @@ The evaluation creates `comparison_report.json`, `route_comparison.csv`, and sha
 ## Validation
 
 ```powershell
-node --check assets/app.js
-node tests/planner.test.cjs
-node tests/observations.test.cjs
-python -B tests/science_test.py
-python -B tests/observations_test.py
-python -B tests/backend_test.py
-node tests/browser-check.cjs
+node --check src/app.js
+node tests/unit/planner.test.cjs
+node tests/unit/observations.test.cjs
+python -B tests/science/science_test.py
+python -B tests/science/observations_test.py
+python -B tests/backend/backend_test.py
+node tests/browser/browser-check.cjs
 ```
 
 Science tests use known flat and inclined surfaces, verify longitude spacing, NoData behavior, source hashes, grid policies, and candidate coordinates. Planner checks cover Dijkstra agreement, complete segment constraints, unknown/steep endpoints, and same-cell paths. Browser checks exercise actual data loading, source-bearing export, desktop/mobile layouts, interactions, and failure handling. Playwright and Chromium are required for the browser checks.
@@ -98,7 +104,7 @@ No real CRISM mineral or THEMIS thermal raster is currently integrated. Earlier 
 
 Use Explore another region to choose Gale, Olympus Mons, or a custom center. Browse Mars zooms out; Use current map center copies the visible center. Load selected region downloads cached native MOLA tiles, then set departure/destination on the map and compare routes. Regions are 6, 12, or 16 degrees wide (about 355-950 km north-south). Longitude wraps through 0/360 and +/-180. Centers are limited to +/-80 degrees; bounds are clipped to +/-85 degrees for the Mercator map. This does not support polar or planet-wide optimal routes. Reset demo restores detailed CTX Jezero.
 
-Sources are NASA PDS MEGT90N000EB global topography and MEGC90N000EB observation counts at 16 pixels/degree (~3.705 km north-south; east-west spacing shrinks with latitude). Acquisition: September 1997-June 2001. Product creation: April 3, 2003; final MEGDR release May 7, 2003. Archive migration dates do not imply new observations. Reproduce with `python data/prepare_global.py`. Full original IMG/LBL/XML files and SHA-256 hashes are retained. Tiles losslessly preserve big-endian source elevation and observation counts as interleaved little-endian int16.
+Sources are NASA PDS MEGT90N000EB global topography and MEGC90N000EB observation counts at 16 pixels/degree (~3.705 km north-south; east-west spacing shrinks with latitude). Acquisition: September 1997-June 2001. Product creation: April 3, 2003; final MEGDR release May 7, 2003. Archive migration dates do not imply new observations. Reproduce with `python scripts/data/prepare_global.py`. Full original IMG/LBL/XML files and SHA-256 hashes are retained. Tiles losslessly preserve big-endian source elevation and observation counts as interleaved little-endian int16.
 
 Regional slopes are finite differences of the native MOLA grid with latitude-corrected spacing, rather than subpixel detail. Regional relief is the absolute residual against four adjacent cells, normalized at 300 m for routing. Boundary cells are blocked because derivative support is incomplete. The 20-degree exclusion is a prototype policy at coarse resolution; it misses many steep local features. Zero-count elevation bins are interpolated and receive a fixed 0.5 added edge-cost penalty in terrain-aware routing; distance-only routing shares slope exclusions but does not apply terrain or support penalties. Route metrics include distance on interpolated cells. Cells with observations are still aggregated medians, not a local survey. Minimum endpoint separation is one nominal cell width.
 
@@ -111,7 +117,7 @@ The sources dialog follows the active terrain dataset: CTX Jezero or global MOLA
 
 The comparison column is an **unweighted slope/relief index**, not the A* objective. It excludes the selected preference weights and the regional interpolated-bin penalty. The numerical routing model has not changed. Regional maximum slope is labeled the maximum sampled coarse gradient, never a within-bin maximum.
 
-Run `node tests/browser-check.cjs` and `node tests/global-check.cjs` with Playwright installed (`npm install --no-save playwright`). The tests start and stop their own HTTP servers and close their browsers. They use a downloaded Playwright browser, an installed Chrome/Edge on Windows, or `BROWSER_EXECUTABLE_PATH`. If no browser is installed, run `npx playwright install chromium`. Regional checks cover Gale, Olympus, antimeridian routing, active provenance, disabled local layers, regional overlay visibility, restored Jezero state and failed data loads.
+Run `node tests/browser/browser-check.cjs` and `node tests/browser/global-check.cjs` with Playwright installed (`npm ci`). The tests start and stop their own HTTP servers and close their browsers. They use a downloaded Playwright browser, an installed Chrome/Edge on Windows, or `BROWSER_EXECUTABLE_PATH`. If no browser is installed, run `npx playwright install chromium`. Regional checks cover Gale, Olympus, antimeridian routing, active provenance, disabled local layers, regional overlay visibility, restored Jezero state and failed data loads.
 
 
 ## Three.js terrain and route view
@@ -124,7 +130,7 @@ Vertical scale defaults to 1x. The optional 3x/5x/10x display exaggeration chang
 
 The renderer is lazy-loaded from `assets/vendor/three/` and adds no CDN requests. WebGL2 support is required for 3D; if unavailable, the 2D planner remains usable. The existing 2D map still loads Leaflet externally. Three.js 0.180.0, its MIT license, package integrity and file hashes are preserved; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-Validate with `node tests/terrain-geometry.test.cjs` and `node tests/terrain3d-check.cjs`. Tests cover triangle-exact route draping, NoData holes, unchanged metrics under display exaggeration, checkpoint inspection, regional and longitude-seam transitions, mobile sizing and WebGL fallback.
+Validate with `node tests/unit/terrain-geometry.test.cjs` and `node tests/browser/terrain3d-check.cjs`. Tests cover triangle-exact route draping, NoData holes, unchanged metrics under display exaggeration, checkpoint inspection, regional and longitude-seam transitions, mobile sizing and WebGL fallback.
 
 
 ## Global CTX orbital visual context
@@ -135,7 +141,7 @@ The mosaic has a native 5 m/pixel source. Whole-region previews intentionally re
 
 The default 6-degree Gale and Olympus regions have 21 cached PNG tiles and checksums in `data/processed/imagery/global_ctx_manifest.json`. Those previews work without the external imagery service. Custom footprints and larger extents stream additional tiles and require internet. If any requested tile is unavailable, the 3D view returns to elevation coloring with a clear message rather than substituting an unrelated photograph. Tile columns wrap at the antimeridian. Rendering uses the service's Mars 2000 geographic coordinates (WKID 104971), not Earth Web Mercator coordinates.
 
-Reproduce cached imagery with `python -B data/prepare_global_imagery.py`. Validate with `node tests/global-imagery.test.cjs`. A route export records loaded 3D imagery product, geographic footprint, preview spacing, source links, tile IDs and available SHA-256 hashes under `visualization.imagery`, separately from route terrain provenance. Display imagery does not change route costs or metrics.
+Reproduce cached imagery with `python -B scripts/data/prepare_global_imagery.py`. Validate with `node tests/unit/global-imagery.test.cjs`. A route export records loaded 3D imagery product, geographic footprint, preview spacing, source links, tile IDs and available SHA-256 hashes under `visualization.imagery`, separately from route terrain provenance. Display imagery does not change route costs or metrics.
 
 Cached service images retain original-source hashes and are kept as PNG for consistent browser delivery. Non-PNG responses are decoded and losslessly encoded to PNG; the manifest distinguishes prepared-file hashes from original-source hashes. Original response bytes remain in the local raw-data cache, excluded from Git.
 
@@ -157,11 +163,11 @@ ChatGPT/Codex assisted with implementation, tests, and documentation. The actual
 
 The default Route tab keeps distance and terrain measurements visible. Estimates and simulation are expandable. Elevation and sampled slope profiles sit below the map. Detailed comparison and investigation candidates are in Compare. Map layers & route settings contains layer visibility, exclusion overlays, and preference sliders. Data & sources remains available from the header.
 
-This layout changes how information is presented; the routing and scientific assumptions are unchanged. `node tests/workspace-check.cjs` checks the guided workflow, optional details, evidence navigation, keyboard tabs, lazy image requests and mobile layout.
+This layout changes how information is presented; the routing and scientific assumptions are unchanged. `node tests/browser/workspace-check.cjs` checks the guided workflow, optional details, evidence navigation, keyboard tabs, lazy image requests and mobile layout.
 
 
 The mission workstation adds a collapsible navigation rail and a terrain-first three-panel desktop layout. On mobile the live terrain comes first; Route Planning brings the existing configuration controls forward. The intelligence panel keeps route context, checkpoint evidence and comparison in the same workspace. Elevation and sampled mean-slope profiles can be collapsed.
 
 Mission Overview shows only current route measurements and session activity. Mission Reports presents the active route, checkpoint notes, source information and assumptions, with the existing JSON export and browser print/save-PDF. Regional walking-time and oxygen estimates remain unavailable. Only the two alternatives actually produced by the planner are compared. No safety score or validated EVA prediction is added.
 
-Presentation code is in `assets/workstation.js` and `assets/workstation.css`; the original map, 3D modules, routing, terrain processing and optional Flask API remain in place. The static frontend has no bundler or production compilation step. Run `node tests/workstation-check.cjs` for navigation, overview/report values, exports, local assets and responsive checks, alongside the existing browser and science suites. Leaflet and uncached remote basemaps still require a network connection.
+Presentation code is in `src/ui/workstation.js` and `src/styles/workstation.css`; the original map, 3D modules, routing, terrain processing and optional Flask API remain in place. The static frontend has no bundler or production compilation step. Run `node tests/browser/workstation-check.cjs` for navigation, overview/report values, exports, local assets and responsive checks, alongside the existing browser and science suites. Leaflet and uncached remote basemaps still require a network connection.

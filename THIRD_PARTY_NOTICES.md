@@ -14,7 +14,7 @@
 
 The 2D map loads Leaflet 1.9.4 (BSD-2-Clause) from unpkg; upstream: https://github.com/Leaflet/Leaflet. The map attribution identifies NASA imagery and OpenPlanetaryMap. Prepared NASA/USGS data products, dates, hashes, image credits and source references are documented by the active manifests, `docs/SCIENCE_METHOD.md`, and the app's Data & sources dialog.
 
-Python processing dependencies are listed in `data/requirements.txt`; optional backend dependencies are listed in `backend/requirements.txt`. This notice documents the bundled 3D dependency and does not assign a project-wide license or alter upstream data terms.
+Python processing dependencies are listed in `scripts/data/requirements.txt`; optional backend dependencies are listed in `backend/requirements.txt`. This notice documents the bundled 3D dependency and does not assign a project-wide license or alter upstream data terms.
 
 
 ## Global CTX Mosaic V01

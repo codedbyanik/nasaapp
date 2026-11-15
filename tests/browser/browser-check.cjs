@@ -1,0 +1,67 @@
+const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const {chromium,launchOptions,assertCleanText}=require('../helpers/browser-support.cjs');
+(async()=>{
+const root=path.resolve(__dirname,'../..');
+const server=http.createServer((req,res)=>{let relative=decodeURIComponent(req.url.split('?')[0]);if(relative==='/')relative='/index.html';const file=path.resolve(root,'.'+relative);if(!file.startsWith(root+path.sep)){res.writeHead(403);return res.end();}fs.readFile(file,(err,data)=>{if(err){res.writeHead(404);return res.end();}const types={'.html':'text/html','.css':'text/css','.js':'text/javascript','.geojson':'application/json'};res.setHeader('Content-Type',types[path.extname(file)]||'application/octet-stream');res.end(data);});});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));
+const launch=launchOptions();
+let browser;
+try{
+browser=await chromium.launch(launch);
+const page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+const url='http://127.0.0.1:'+server.address().port;
+const mapAssets=new Map();page.on('response',response=>{if(/leaflet@1\.9\.4\/dist\/leaflet\.(?:js|css)$/.test(response.url())&&response.ok())mapAssets.set(response.url(),response.body().then(body=>({body,contentType:response.headers()['content-type']})));});
+async function failurePage(){const p=await browser.newPage();await p.route('**/leaflet@1.9.4/dist/**',async route=>{const asset=mapAssets.get(route.request().url());if(asset)await route.fulfill(await asset);else await route.continue();});return p;}
+
+await page.goto(url,{waitUntil:'networkidle',timeout:60000});await page.waitForFunction(()=>window._route?.length>1,{timeout:10000});
+assert(!/\uFFFD|Â°|â€™|â†/.test(await page.locator('body').innerText()),'No damaged display symbols');
+assertCleanText(await page.locator('body').innerText());
+assert.equal(await page.locator('#exportBtn').isDisabled(),false);
+assert(await page.locator('.leaflet-image-layer').count()>0,'Local NASA imagery must be displayed');
+assert(await page.evaluate(()=>MarsPlanner.dataset.source_product.startsWith('JEZ_ctx')));
+assert((await page.locator('#dataStatus').textContent()).includes('CTX + MOLA loaded'));
+assert((await page.locator('#terrainMetrics').innerText()).includes('Mean slope'));await page.locator('#evidenceTab').click();await page.locator('#imageDetails > summary').click();
+await page.waitForFunction(()=>document.getElementById('observationChoice').options.length>1&&document.getElementById('imageCaption').textContent.includes('orbital crop'),{timeout:15000});
+assert(await page.locator('.checkpoint-button').count()>=3);
+assert((await page.locator('#observationChoice').inputValue())==='ESP_094047_1985');
+assert((await page.locator('#imageSource').innerText()).includes('19 Aug 2026'));
+assert((await page.locator('#imageSource').innerText()).includes('from full-resolution JP2'));
+assert((await page.locator('#imageSource').innerText()).includes('Published\nNot supplied'));
+await page.locator('#contextWidth').selectOption('600');await page.waitForFunction(()=>document.getElementById('imageCaption').textContent.includes('0.6 km'));
+await page.locator('#observationChoice').selectOption('ctx');await page.waitForFunction(()=>document.getElementById('imageCaption').textContent.startsWith('CTX orbital crop'));
+assert((await page.locator('#imageSource').innerText()).includes('24 Jul 2020'));
+await page.locator('#surfaceDetails > summary').click();assert((await page.locator('#surfaceCoverage').innerText()).includes('nearby landing site'));
+await page.locator('.surface-observation').first().locator('summary').click();assert(await page.locator('.panorama-scroll').first().isVisible());
+await page.locator('#reviewDetails > summary').click();await page.locator('#reviewNote').fill('Inspect texture changes; individual rocks require a closer survey.');await page.locator('#reviewBtn').click();
+assert((await page.locator('#reviewProgress').innerText()).startsWith('1 /'));
+await page.locator('#sourcesBtn').click();assert(await page.locator('#sourcesDialog').isVisible());await page.locator('#closeSources').click();
+const downloadPromise=page.waitForEvent('download');await page.locator('#exportBtn').click();const download=await downloadPromise;const data=JSON.parse(fs.readFileSync(await download.path(),'utf8'));assert(data.waypoints.length>1&&data.prototype&&data.coordinate_order==='latitude,longitude');assert(data.source_product.startsWith('JEZ_ctx')&&data.source_checksums.length===2);
+assert(data.observation_review.checkpoints[0].review_recorded);assert(data.observation_review.checkpoints[0].note.includes('texture changes'));assert(data.observation_review.checkpoints[0].covering_observations[0].source_files.length>=3);assert.equal(data.observation_review.review_is_safety_certification,false);
+assert(data.observation_review.checkpoints[0].viewed_observations.some(o=>o.preview_spacing_m===1&&o.preview_sha256&&o.captured_start));
+await page.locator('.checkpoint-button').last().click();assert((await page.locator('#surfaceCoverage').innerText()).includes('No exact ground-level photograph'));
+await page.locator('#storyBtn').click();assert((await page.locator('#observationTitle').innerText()).includes('Slope review'));
+await page.locator('#overviewTab').click();await page.locator('#routeDetails > summary').click();await page.locator('#roverBtn').click();await page.waitForFunction(()=>document.getElementById('simStatus').textContent.includes('Simulated obstacle'),{timeout:15000});
+const paused=await page.locator('#simStatus').innerText();await page.waitForTimeout(500);assert.equal(await page.locator('#simStatus').innerText(),paused);
+await page.locator('#roverBtn').click();await page.waitForFunction(()=>document.getElementById('simStatus').textContent.includes('complete'),{timeout:15000});
+await page.locator('#roverBtn').click();await page.waitForTimeout(300);await page.locator('#clrBtn').click();await page.waitForTimeout(500);assert.equal(await page.evaluate(()=>window._route),null);assert(await page.locator('#roverBtn').isDisabled());
+await page.locator('#cmpBtn').click();await page.locator('#advancedSettings > summary').click();await page.locator('#l_haz').uncheck();assert(await page.evaluate(()=>window._route.every(p=>!MarsPlanner.hazardAt(p))));await page.locator('#l_haz').check();
+await page.locator('#l_obs').check();assert(await page.evaluate(()=>window._route.every(p=>!MarsPlanner.hazardAt(p))));await page.locator('#l_obs').uncheck();
+await page.locator('#w1').evaluate(e=>{e.value='2';e.dispatchEvent(new Event('input'));});assert(await page.locator('#exportBtn').isDisabled());await page.locator('#safeBtn').click();
+await page.locator('#pickStart').click();await page.keyboard.press('Escape');assert(!(await page.locator('.map-shell').getAttribute('class')).includes('selecting'));
+await page.locator('#pickStart').click();const box=await page.locator('#map').boundingBox();for(const [x,y] of [[.25,.65],[.35,.55],[.45,.75]]){await page.mouse.click(box.x+box.width*x,box.y+box.height*y);if(await page.locator('#startName').innerText()==='Custom departure')break;}assert.equal(await page.locator('#startName').innerText(),'Custom departure');assert(await page.locator('#exportBtn').isDisabled());await page.locator('#safeBtn').click();assert(await page.evaluate(()=>window._route?.length>1));
+await page.locator('#w1').evaluate(e=>{e.value='1.2';e.dispatchEvent(new Event('input'));});await page.locator('#demoBtn').click();
+await page.locator('#evidenceTab').click();assert((await page.locator('#reviewProgress').innerText()).startsWith('0 /'),'Replanning clears manual reviews');
+await page.waitForFunction(()=>document.getElementById('imageCaption').textContent.includes('detail from the full-resolution JP2'));
+await page.locator('.surface-observation').first().locator('summary').click();
+await page.waitForFunction(()=>{const img=document.querySelector('.panorama-scroll img');return img.complete&&img.naturalWidth>0;});
+await page.locator('.observation-card').screenshot({path:path.join(root,'observatory-preview.png')});
+assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.screenshot({path:path.join(root,'desktop-preview.png'),fullPage:true});
+await page.setViewportSize({width:390,height:844});await page.waitForTimeout(500);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Mobile must not overflow');await page.screenshot({path:path.join(root,'mobile-preview.png'),fullPage:true});
+const fallback=await failurePage();await fallback.route('**/ctx_imagery.png',r=>r.abort());await fallback.goto(url,{waitUntil:'networkidle'});await fallback.waitForFunction(()=>!document.getElementById('tileNotice').hidden);assert(await fallback.locator('#tileNotice').isVisible());assert(await fallback.evaluate(()=>window._route.length>1));await fallback.close();
+const noTerrain=await failurePage();await noTerrain.route('**/terrain_grid.json',r=>r.abort());await noTerrain.goto(url,{waitUntil:'networkidle'});await noTerrain.waitForFunction(()=>document.getElementById('routeInfo').textContent.includes('NASA terrain could not load'));assert((await noTerrain.locator('#routeInfo').innerText()).includes('NASA terrain could not load'));assert(await noTerrain.locator('#safeBtn').isDisabled());await noTerrain.close();
+const noEvidence=await failurePage();await noEvidence.route('**/observations.json',r=>r.abort());await noEvidence.goto(url,{waitUntil:'networkidle'});await noEvidence.waitForFunction(()=>window._route?.length>1);await noEvidence.locator('#evidenceTab').click();assert(await noEvidence.evaluate(()=>window._route.length>1));await noEvidence.waitForFunction(()=>document.getElementById('evidenceUnavailable').textContent.includes('unavailable'));assert((await noEvidence.locator('#evidenceUnavailable').innerText()).includes('unavailable'));assert(await noEvidence.locator('#observationContent').isHidden());await noEvidence.close();
+const noPreview=await failurePage();await noPreview.route('**/observations/ESP_094047_1985*.png',r=>r.abort());await noPreview.goto(url,{waitUntil:'networkidle'});await noPreview.locator('#evidenceTab').click();await noPreview.waitForFunction(()=>document.getElementById('imageCaption').textContent.includes('could not load'));assert((await noPreview.locator('#imageCaption').innerText()).includes('could not load'));await noPreview.waitForFunction(()=>window._route?.length>1);assert(await noPreview.evaluate(()=>window._route.length>1));await noPreview.close();
+const missing=await failurePage();await missing.route('**/leaflet.js',r=>r.abort());await missing.goto(url,{waitUntil:'networkidle'});assert((await missing.locator('#routeInfo').innerText()).includes('could not load'));assert(await missing.locator('#safeBtn').isDisabled());await missing.close();
+assert.deepEqual(errors,[]);console.log('Browser checks passed: checkpoint images/dates, nearby/regional panoramas, inspection notes/export/reset, story, desktop/mobile, route controls, simulation and data/evidence/image/library failure handling.');console.log('Preview screenshots saved to project root.');
+}finally{if(browser)await browser.close();await new Promise(r=>server.close(r));}
+})().catch(e=>{console.error(e);process.exitCode=1;});

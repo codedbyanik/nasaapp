@@ -37,13 +37,13 @@ Select observed, unblocked cells with 5–12° mean slope in the fixed demo corr
 
 ## Evaluation
 
-`node experiments/evaluate_routes.cjs` evaluates three fixed corridors and four weight settings on the default corridor. It writes paths, metrics, assumptions, and source hashes to `comparison_report.json` and exports a CSV. The corridors are selected case studies, not a random sample. Do not infer universal superiority from them.
+`node scripts/evaluation/evaluate_routes.cjs` evaluates three fixed corridors and four weight settings on the default corridor. It writes paths, metrics, assumptions, and source hashes to `comparison_report.json` and exports a CSV. The corridors are selected case studies, not a random sample. Do not infer universal superiority from them.
 
 Tests compare A* against Dijkstra, verify all path segments, test blocked/unknown cells and same-cell endpoints, and verify slope against analytically known flat and inclined planes. Browser tests check actual data loading, measurements, exports, interaction lifecycle, and failure behavior.
 
 ## Checkpoint observations and mission story
 
-`data/prepare_observations.py` preserves the official HiRISE pages, PDS RED labels, map-projected browse images, and two NASA-linked Perseverance panoramas. The observation catalog records source URLs, source-file and preview SHA-256 hashes, catalog footprints, dates, and display processing. This is a **curated snapshot**, not an exhaustive or live NASA archive search.
+`scripts/data/prepare_observations.py` preserves the official HiRISE pages, PDS RED labels, map-projected browse images, and two NASA-linked Perseverance panoramas. The observation catalog records source URLs, source-file and preview SHA-256 hashes, catalog footprints, dates, and display processing. This is a **curated snapshot**, not an exhaustive or live NASA archive search.
 
 HiRISE products `ESP_094047_1985` and `ESP_093981_1985` were acquired on 19 and 14 August 2026. Historical comparison products are `ESP_073068_1985` and `ESP_073912_1985`. Point-in-polygon matching uses the rounded footprint published by the instrument team; proximity alone never becomes an exact coverage match. Select the newest **covering observation in this snapshot**. Acquisition times and product-creation times come from the PDS labels; public-release dates are unknown where the labels do not provide them. CTX metadata records a publication date of 24 July 2020; individual source capture dates for a mosaic pixel are not supplied. Never present retrieval or processing timestamps as image acquisition dates.
 
@@ -69,18 +69,18 @@ The human expedition narrative is explicitly fictional. Manual notes describe th
 ## Reproduction
 
 ```powershell
-python -m pip install -r data/requirements.txt
-python -B data/prepare_nasa.py
-python -B data/download_hirise_detail.py
-python -B data/prepare_observations.py
-node experiments/evaluate_routes.cjs
-python -B experiments/plot_analysis.py
-node tests/planner.test.cjs
-node tests/observations.test.cjs
-python -B tests/science_test.py
-python -B tests/observations_test.py
-python -B tests/backend_test.py
-node tests/browser-check.cjs
+python -m pip install -r scripts/data/requirements.txt
+python -B scripts/data/prepare_nasa.py
+python -B scripts/data/download_hirise_detail.py
+python -B scripts/data/prepare_observations.py
+node scripts/evaluation/evaluate_routes.cjs
+python -B scripts/evaluation/plot_analysis.py
+node tests/unit/planner.test.cjs
+node tests/unit/observations.test.cjs
+python -B tests/science/science_test.py
+python -B tests/science/observations_test.py
+python -B tests/backend/backend_test.py
+node tests/browser/browser-check.cjs
 ```
 
 Downloads are cached. Original inputs remain in `data/raw/nasa`; processed arrays, map images, georeferenced derivative GeoTIFFs, and manifests are under `data/processed/nasa`.
@@ -90,7 +90,7 @@ Downloads are cached. Original inputs remain in `data/raw/nasa`; processed array
 
 Use Explore another region to choose Gale, Olympus Mons, or a custom center. Browse Mars zooms out; Use current map center copies the visible center. Load selected region downloads cached native MOLA tiles, then set departure/destination on the map and compare routes. Regions are 6, 12, or 16 degrees wide (about 355-950 km north-south). Longitude wraps through 0/360 and +/-180. Centers are limited to +/-80 degrees; bounds are clipped to +/-85 degrees for the Mercator map. This does not support polar or planet-wide optimal routes. Reset demo restores detailed CTX Jezero.
 
-Sources are NASA PDS MEGT90N000EB global topography and MEGC90N000EB observation counts at 16 pixels/degree (~3.705 km north-south; east-west spacing shrinks with latitude). Acquisition: September 1997-June 2001. Product creation: April 3, 2003; final MEGDR release May 7, 2003. Archive migration dates do not imply new observations. Reproduce with `python data/prepare_global.py`. Full original IMG/LBL/XML files and SHA-256 hashes are retained. Tiles losslessly preserve big-endian source elevation and observation counts as interleaved little-endian int16.
+Sources are NASA PDS MEGT90N000EB global topography and MEGC90N000EB observation counts at 16 pixels/degree (~3.705 km north-south; east-west spacing shrinks with latitude). Acquisition: September 1997-June 2001. Product creation: April 3, 2003; final MEGDR release May 7, 2003. Archive migration dates do not imply new observations. Reproduce with `python scripts/data/prepare_global.py`. Full original IMG/LBL/XML files and SHA-256 hashes are retained. Tiles losslessly preserve big-endian source elevation and observation counts as interleaved little-endian int16.
 
 Regional slopes are finite differences of the native MOLA grid with latitude-corrected spacing, rather than subpixel detail. Regional relief is the absolute residual against four adjacent cells, normalized at 300 m for routing. Boundary cells are blocked because derivative support is incomplete. The 20-degree exclusion is a prototype policy at coarse resolution; it misses many steep local features. Zero-count elevation bins are interpolated and receive a fixed 0.5 added edge-cost penalty in terrain-aware routing; distance-only routing shares slope exclusions but does not apply terrain or support penalties. Route metrics include distance on interpolated cells. Cells with observations are still aggregated medians, not a local survey. Minimum endpoint separation is one nominal cell width.
 
@@ -121,6 +121,6 @@ The mosaic has a native 5 m/pixel source. Whole-region previews intentionally re
 
 The default 6-degree Gale and Olympus regions have 21 cached PNG tiles and checksums in `data/processed/imagery/global_ctx_manifest.json`. Those previews work without the external imagery service. Custom footprints and larger extents stream additional tiles and require internet. If any requested tile is unavailable, the 3D view returns to elevation coloring with a clear message rather than substituting an unrelated photograph. Tile columns wrap at the antimeridian. Rendering uses the service's Mars 2000 geographic coordinates (WKID 104971), not Earth Web Mercator coordinates.
 
-Reproduce cached imagery with `python -B data/prepare_global_imagery.py`. Validate with `node tests/global-imagery.test.cjs`. A route export records loaded 3D imagery product, geographic footprint, preview spacing, source links, tile IDs and available SHA-256 hashes under `visualization.imagery`, separately from route terrain provenance. Display imagery does not change route costs or metrics.
+Reproduce cached imagery with `python -B scripts/data/prepare_global_imagery.py`. Validate with `node tests/unit/global-imagery.test.cjs`. A route export records loaded 3D imagery product, geographic footprint, preview spacing, source links, tile IDs and available SHA-256 hashes under `visualization.imagery`, separately from route terrain provenance. Display imagery does not change route costs or metrics.
 
 Cached service images retain original-source hashes and are kept as PNG for consistent browser delivery. Non-PNG responses are decoded and losslessly encoded to PNG; the manifest distinguishes prepared-file hashes from original-source hashes. Original response bytes remain in the local raw-data cache, excluded from Git.
