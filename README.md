@@ -18,7 +18,7 @@ After a fresh clone, the prepared app runs without downloading the raw products.
 python -B -m http.server 8000 --bind 127.0.0.1
 ```
 
-Open http://127.0.0.1:8000. The processed imagery, terrain grid, and manifests are already included. HTTP is required to load the JSON data. Leaflet loads from an external CDN; the interface uses system fonts. Missing terrain disables planning rather than reverting to fabricated costs.
+Open http://127.0.0.1:8000. The processed imagery, terrain grid, and manifests are already included. HTTP is required to load the JSON data. Leaflet loads from an external CDN; the interface bundles Inter, Space Grotesk, IBM Plex Mono, and a Lucide icon subset locally, with system fallbacks. Missing terrain disables planning rather than reverting to fabricated costs.
 
 ## What is implemented
 
@@ -149,12 +149,19 @@ Further changes are recorded as new work. Any event submission should distinguis
 ChatGPT/Codex assisted with implementation, tests, and documentation. The actual NASA imagery, source metadata, model limitations, and third-party component notices remain documented in the app and its manifests.
 
 
-## Using the simplified workspace
+## Using the mission workstation
 
 1. **Choose a place** in the planning panel and select Open location. Custom latitude/longitude fields appear only for Custom coordinates. Area size and whole-planet browsing are under Area size & map browsing.
-2. **Set your route** using Change beside the departure or destination, then click the map. Plan route creates a terrain-aware candidate; Compare two routes also draws the distance-focused alternative. On a phone, Show map jumps to the map and planning a route brings it into view.
-3. **Inspect the route** by clicking a numbered map marker or Inspect a checkpoint. The Checkpoint evidence tab opens automatically. Observation source & dates, inspection notes and rover photographs are separate expandable sections. Large checkpoint previews load when evidence is opened.
+2. **Set your route** using Change beside the departure or destination, then click the map. Plan route creates a terrain-aware candidate; Compare two routes also draws the distance-focused alternative. On a phone, the map is shown first; Route Planning brings configuration controls forward, and planning a route returns to the map.
+3. **Inspect the route** by clicking a numbered map marker or Inspect a checkpoint. The Inspect tab opens automatically. Observation source & dates, inspection notes and rover photographs are separate expandable sections. Large checkpoint previews load when evidence is opened.
 
-The default Your route tab keeps distance and terrain measurements visible. Estimates, elevation profile and simulation are under Elevation, estimates & simulation. Detailed comparison and investigation candidates are in Analysis. Map layers & route settings contains layer visibility, exclusion overlays, and preference sliders. Data & sources remains available from the header.
+The default Route tab keeps distance and terrain measurements visible. Estimates and simulation are expandable. Elevation and sampled slope profiles sit below the map. Detailed comparison and investigation candidates are in Compare. Map layers & route settings contains layer visibility, exclusion overlays, and preference sliders. Data & sources remains available from the header.
 
 This layout changes how information is presented; the routing and scientific assumptions are unchanged. `node tests/workspace-check.cjs` checks the guided workflow, optional details, evidence navigation, keyboard tabs, lazy image requests and mobile layout.
+
+
+The mission workstation adds a collapsible navigation rail and a terrain-first three-panel desktop layout. On mobile the live terrain comes first; Route Planning brings the existing configuration controls forward. The intelligence panel keeps route context, checkpoint evidence and comparison in the same workspace. Elevation and sampled mean-slope profiles can be collapsed.
+
+Mission Overview shows only current route measurements and session activity. Mission Reports presents the active route, checkpoint notes, source information and assumptions, with the existing JSON export and browser print/save-PDF. Regional walking-time and oxygen estimates remain unavailable. Only the two alternatives actually produced by the planner are compared. No safety score or validated EVA prediction is added.
+
+Presentation code is in `assets/workstation.js` and `assets/workstation.css`; the original map, 3D modules, routing, terrain processing and optional Flask API remain in place. The static frontend has no bundler or production compilation step. Run `node tests/workstation-check.cjs` for navigation, overview/report values, exports, local assets and responsive checks, alongside the existing browser and science suites. Leaflet and uncached remote basemaps still require a network connection.

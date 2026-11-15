@@ -59,7 +59,7 @@ function create({map,planner:P,footprintLayer,onReviewChanged=()=>{}}){
  }
  function inspect(p,title='Selected map location'){const key=p.map(n=>n.toFixed(5)).join(',');let c=extra.find(c=>c.id===key);if(!c){c={id:key,number:null,title,p:p.slice(),distance:null,prompt:'Inspect the surroundings at this coordinate. Observations are historical; coverage and small hazards need separate checks.',reviewed:false,note:''};extra.push(c);}select(c,true);}
  function select(c,move=false){
-  if(!c||failed)return;if(move)window.MarsWorkspace?.open('evidence');selected=c;version++;window._observationPoint=c.p.slice();
+  if(!c||failed)return;if(move){window.MarsWorkspace?.open('evidence');window.dispatchEvent(new CustomEvent('mars:inspection',{detail:{title:c.title}}));}selected=c;version++;window._observationPoint=c.p.slice();
   if(!catalog){$('observationTitle').textContent='Loading observation evidence…';return;}
   if(P.dataset?.regional){
    $('observationContent').hidden=true;$('evidenceUnavailable').hidden=false;

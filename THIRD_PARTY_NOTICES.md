@@ -27,3 +27,10 @@ Python processing dependencies are listed in `data/requirements.txt`; optional b
 - Service item and its terms: https://www.arcgis.com/home/item.html?id=30c4acfe36284b1784bf07d5d73f9e4d
 - The service item states that the Murray Lab/Caltech grants free use of V01 for all purposes, with NASA/JPL/MSSS/The Murray Lab credit. Esri's hosted-service terms also apply; the source-data permission does not replace those service terms.
 - Cached files, source URLs and hashes are listed in `data/processed/imagery/global_ctx_manifest.json`. The app fetches only bounded context tiles; it does not download or redistribute the complete multi-terabyte mosaic.
+
+
+## Workstation typography and icons
+
+- Inter, Space Grotesk and IBM Plex Mono are served locally from `assets/vendor/fonts/`. Fonts were obtained through Google Fonts; each family's SIL Open Font License is retained alongside the font.
+- A subset of Lucide SVG icons is embedded in `assets/vendor/lucide-icons.js`, obtained from https://github.com/lucide-icons/lucide. The ISC license and upstream notices are retained in `assets/vendor/lucide-LICENSE.txt`.
+- These are presentation assets and do not represent NASA datasets or mission instrumentation.
