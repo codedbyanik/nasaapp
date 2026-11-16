@@ -10,6 +10,7 @@ Jezero uses the prepared CTX stereo elevation derivatives and archived orbital/r
 
 - `src/ui/workspace.js`: original reusable disclosures and accessible route/evidence/analysis tabs; keeps bound controls and IDs.
 - `src/ui/workstation.js`: navigation rail, compact mission header, three-panel terrain layout, contextual route facts, overview, activity, comparison charts and report rendering. Moves the existing map and controls rather than creating replacement engines.
+- `src/ui/visual-cues.js`: local Lucide action icons, accessible visible labels and mission overview shortcuts. Restores decoration after existing handlers update labels.
 - `src/styles/workstation.css`: requested color tokens, locally hosted typography, Lucide styling, responsive panels and print layout.
 - `assets/vendor/fonts/`, `assets/vendor/lucide-icons.js`: local presentation assets and retained upstream licenses.
 

@@ -34,3 +34,5 @@ Python processing dependencies are listed in `scripts/data/requirements.txt`; op
 - Inter, Space Grotesk and IBM Plex Mono are served locally from `assets/vendor/fonts/`. Fonts were obtained through Google Fonts; each family's SIL Open Font License is retained alongside the font.
 - A subset of Lucide SVG icons is embedded in `assets/vendor/lucide-icons.js`, obtained from https://github.com/lucide-icons/lucide. The ISC license and upstream notices are retained in `assets/vendor/lucide-LICENSE.txt`.
 - These are presentation assets and do not represent NASA datasets or mission instrumentation.
+
+Additional action icons use Lucide v0.468.0. Its upstream license is retained in `assets/vendor/lucide-0.468.0-LICENSE.txt`. Icons are decorative supplements to visible action labels.
