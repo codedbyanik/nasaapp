@@ -171,3 +171,12 @@ The mission workstation adds a collapsible navigation rail and a terrain-first t
 Mission Overview shows only current route measurements and session activity. Mission Reports presents the active route, checkpoint notes, source information and assumptions, with the existing JSON export and browser print/save-PDF. Regional walking-time and oxygen estimates remain unavailable. Only the two alternatives actually produced by the planner are compared. No safety score or validated EVA prediction is added.
 
 Presentation code is in `src/ui/workstation.js` and `src/styles/workstation.css`; the original map, 3D modules, routing, terrain processing and optional Flask API remain in place. The static frontend has no bundler or production compilation step. Run `node tests/browser/workstation-check.cjs` for navigation, overview/report values, exports, local assets and responsive checks, alongside the existing browser and science suites. Leaflet and uncached remote basemaps still require a network connection.
+
+
+### Flexible planning tools
+
+Open **Destinations & planning pins** below the endpoint controls for labeled destination shortcuts, coordinate entry, Swap A / B, and Drop a pin. Right-click the 2D map for location actions. **Show places** frames available reference/destination markers and saved pins. Planning-place visibility is independent of routing constraints. Pins are local bookmarks and are included in route JSON; they do not create a multi-stop route or confirm scientific value/access.
+
+The lander reference marks the published Perseverance landing location. D markers represent example destinations and DEM-derived candidates; P markers represent your own pins. Regional mode removes the Jezero references. Preference presets next to the existing slope/relief sliders are prototype weights and require replanning.
+
+Use **Guide** to replay the expanded twelve-step tutorial and the optional illustrative arrival animation. Reduced-motion preferences are respected.

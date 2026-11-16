@@ -40,8 +40,23 @@ Leaflet's existing CDN dependency and uncached remote imagery still require conn
 
 ## First-visit guidance
 
-`src/ui/onboarding.js` presents a welcome dialog on first visit. Visitors can start a seven-step walkthrough or skip directly to the app. The Guide button reopens the introduction at any time. A versioned browser-local preference remembers start, skip or completion; no account, tracking service or server storage is used. Guidance remains usable if local storage is blocked, although the choice cannot persist across visits in that case.
+`src/ui/onboarding.js` presents a welcome dialog on first visit. Visitors can start a twelve-step walkthrough or skip directly to the app. The Guide button reopens the introduction at any time. A versioned browser-local preference remembers start, skip or completion; no account, tracking service or server storage is used. Guidance remains usable if local storage is blocked, although the choice cannot persist across visits in that case.
 
 The walkthrough highlights existing controls for region selection, endpoints, calculation/comparison, checkpoint inspection, 3D, sources and reports. It changes workspace views, not routes, weights, data or review notes. Visitors can go back, exit, finish or press Escape. Native dialog semantics handle welcome focus; the optional tour is non-modal so the actual site remains usable.
 
 `node tests/browser/onboarding-check.cjs` covers fresh/returning visits, skip, all tour steps, replay, keyboard focus, mobile and blocked storage. Other browser suites use a returning-visitor fixture to continue testing their existing workflows.
+
+
+## Planning convenience tools
+
+`src/features/planning-tools.js` adds destination shortcuts, coordinate entry, A/B swapping, map pin placement, a pin list, planning-place visibility and route preference presets. It calls the validated `MarsPlanning` interface owned by the existing map orchestration. Endpoint changes clear the previous route and its review state; pin creation does not change route costs or existing route measurements.
+
+The reference lander symbol identifies the published Perseverance landing coordinate. D markers identify the example delta waypoint and selected traversable DEM-derived investigation candidates, not confirmed discoveries. P markers identify user-created planning pins. Regional mode supplies its current example destination and does not retain Jezero reference markers.
+
+Up to 20 planning pins are stored locally when browser storage is available. Names and coordinates are validated, user labels are rendered as text, and pins are included separately under `planning_places` in route JSON exports. They are bookmarks, not multi-stop itineraries or verified access points. A route still connects A to B; return travel is not automatically added.
+
+Default, Lower slopes and Lower relief presets set the same prototype slope/relief weights used by existing sliders. They do not alter exclusions or establish operational safety. Changing weights requires a fresh route calculation.
+
+The welcome dialog includes a short SVG landing illustration, explicitly labeled illustrative. It does not depict actual spacecraft imagery or modify map data. It does not delay the welcome actions and is static when reduced motion is requested. The extended guide explains destination/pin tools, coordinate entry, presets, slope avoidance, relief avoidance, layers and profiles.
+
+`node tests/browser/planning-tools-check.cjs` verifies endpoint validation, pin persistence/export, unchanged metrics when saving pins, swapping, presets, visibility, regional state and mobile layout.

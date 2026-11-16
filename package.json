@@ -6,7 +6,7 @@
     "start": "python -B -m http.server 8000 --bind 127.0.0.1",
     "test": "npm run test:unit",
     "test:unit": "node tests/unit/planner.test.cjs && node tests/unit/observations.test.cjs && node tests/unit/terrain-geometry.test.cjs && node tests/unit/global-imagery.test.cjs",
-    "test:browser": "node tests/browser/onboarding-check.cjs && node tests/browser/workstation-check.cjs && node tests/browser/workspace-check.cjs && node tests/browser/browser-check.cjs && node tests/browser/global-check.cjs && node tests/browser/terrain3d-check.cjs",
+    "test:browser": "node tests/browser/onboarding-check.cjs && node tests/browser/planning-tools-check.cjs && node tests/browser/workstation-check.cjs && node tests/browser/workspace-check.cjs && node tests/browser/browser-check.cjs && node tests/browser/global-check.cjs && node tests/browser/terrain3d-check.cjs",
     "test:backend": "python -B tests/backend/backend_test.py",
     "evaluate": "node scripts/evaluation/evaluate_routes.cjs"
   },
