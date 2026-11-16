@@ -59,6 +59,6 @@ Data preparation dependencies are installed with `python -m pip install -r scrip
 
 ## Deployment
 
-Vercel continues to serve the root `index.html`. `vercel.json` explicitly selects static output from the repository root, with no installation or build command. JavaScript test dependencies are development tools and are not required to serve the app. No dataset routes or API rewrites are introduced.
+Vercel serves the root `index.html`. `vercel.json` selects static output from the repository root, with no installation or build command. JavaScript test dependencies are development tools and are not required to serve the app. Dataset URLs remain stable; the configured `/api/route` rewrite forwards requests to the optional Render summary service. Browser-based terrain routing does not depend on that service.
 
 The root entry point is intentional: moving it would change every relative data and documentation URL without improving the scientific or UI architecture. Local development uses the same static URL layout as deployment.
