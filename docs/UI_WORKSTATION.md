@@ -36,3 +36,12 @@ There is no bundler or production compilation step. The deployed frontend serves
 - Existing planner, observations, terrain geometry, global imagery and backend suites remain applicable.
 
 Leaflet's existing CDN dependency and uncached remote imagery still require connectivity. Font and icon delivery introduces no additional remote runtime dependency.
+
+
+## First-visit guidance
+
+`src/ui/onboarding.js` presents a welcome dialog on first visit. Visitors can start a seven-step walkthrough or skip directly to the app. The Guide button reopens the introduction at any time. A versioned browser-local preference remembers start, skip or completion; no account, tracking service or server storage is used. Guidance remains usable if local storage is blocked, although the choice cannot persist across visits in that case.
+
+The walkthrough highlights existing controls for region selection, endpoints, calculation/comparison, checkpoint inspection, 3D, sources and reports. It changes workspace views, not routes, weights, data or review notes. Visitors can go back, exit, finish or press Escape. Native dialog semantics handle welcome focus; the optional tour is non-modal so the actual site remains usable.
+
+`node tests/browser/onboarding-check.cjs` covers fresh/returning visits, skip, all tour steps, replay, keyboard focus, mobile and blocked storage. Other browser suites use a returning-visitor fixture to continue testing their existing workflows.

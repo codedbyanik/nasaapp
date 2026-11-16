@@ -1,10 +1,10 @@
 const assert=require('node:assert/strict'),path=require('node:path');
-const {chromium,launchOptions,serve,assertCleanText}=require('../helpers/browser-support.cjs');
+const {chromium,launchOptions,serve,assertCleanText,returningVisitor}=require('../helpers/browser-support.cjs');
 (async()=>{const server=await serve(path.resolve(__dirname,'../..'));let browser;
 try{
  browser=await chromium.launch(launchOptions());const page=await browser.newPage({viewport:{width:1600,height:1000}}),errors=[],failed=[];
  page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400&&r.url().startsWith(server.url))failed.push(r.url());});
- await page.goto(server.url);await page.waitForFunction(()=>window._routeExport?.metrics.d>0);await page.evaluate(()=>document.fonts.ready);
+ await returningVisitor(page);await page.goto(server.url);await page.waitForFunction(()=>window._routeExport?.metrics.d>0);await page.evaluate(()=>document.fonts.ready);
  assert(await page.evaluate(()=>['Inter','Space Grotesk','IBM Plex Mono'].every(name=>document.fonts.check('12px "'+name+'"'))));
  const initial=await page.evaluate(()=>JSON.stringify(window._routeExport.metrics));assert(await page.locator('#terrainProfile').isVisible());assert.equal(await page.locator('#slopeProfile svg').count(),1);assert.equal(await page.locator('#safeBtn > .action-icon').count(),1);assert.equal(await page.locator('#safeBtn > .action-icon').getAttribute('aria-hidden'),'true');
  assert.equal(await page.locator('#toggleNavigation').getAttribute('aria-expanded'),'true');await page.click('#toggleNavigation');assert.equal(await page.locator('#toggleNavigation').getAttribute('aria-expanded'),'false');await page.click('#toggleNavigation');

@@ -1,9 +1,9 @@
 const assert=require('node:assert/strict'),path=require('node:path');
-const {chromium,launchOptions,serve,assertCleanText}=require('../helpers/browser-support.cjs');
+const {chromium,launchOptions,serve,assertCleanText,returningVisitor}=require('../helpers/browser-support.cjs');
 (async()=>{const server=await serve(path.resolve(__dirname,'../..'));let browser;
 try{
  browser=await chromium.launch(launchOptions());const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[],imageRequests=[];page.on('request',r=>{if(/observations\/.*detail\.png/.test(r.url()))imageRequests.push(r.url());});page.on('pageerror',e=>errors.push(e.message));
- await page.goto(server.url);await page.waitForFunction(()=>window._route?.length>1);
+ await returningVisitor(page);await page.goto(server.url);await page.waitForFunction(()=>window._route?.length>1);
  assert.equal(imageRequests.length,0,'Large inspection images should be lazy until requested');assert(await page.locator('#overviewPanel').isVisible());assert(await page.locator('#evidencePanel').isHidden());assert(await page.locator('#analysisPanel').isHidden());assert(!(await page.locator('#advancedSettings').evaluate(n=>n.open)));assert(await page.locator('.coordinate-inputs').isHidden());assert(await page.locator('#pickStart').isVisible());assert(await page.locator('#safeBtn').isVisible());
  await page.locator('#pickStart').click();assert.equal(await page.locator('#pickStart').getAttribute('aria-pressed'),'true');assert((await page.locator('#selectionHint').innerText()).includes('Click the map'));await page.keyboard.press('Escape');assert.equal(await page.locator('#pickStart').getAttribute('aria-pressed'),'false');
  await page.locator('#storyBtn').click();assert(await page.locator('#evidencePanel').isVisible());assert.equal(await page.locator('#evidenceTab').getAttribute('aria-selected'),'true');assert(!(await page.locator('#imageDetails').evaluate(n=>n.open)));assert(!(await page.locator('#reviewDetails').evaluate(n=>n.open)));await page.locator('#imageDetails > summary').click();await page.waitForFunction(()=>document.getElementById('imageSource').textContent.includes('ESP_'));assert((await page.locator('#imageSource').innerText()).includes('Captured'));

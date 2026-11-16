@@ -1,5 +1,5 @@
 const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
-const {chromium,launchOptions,assertCleanText}=require('../helpers/browser-support.cjs');
+const {chromium,launchOptions,assertCleanText,returningVisitor}=require('../helpers/browser-support.cjs');
 (async()=>{
 const root=path.resolve(__dirname,'../..');
 const server=http.createServer((req,res)=>{let relative=decodeURIComponent(req.url.split('?')[0]);if(relative==='/')relative='/index.html';const file=path.resolve(root,'.'+relative);if(!file.startsWith(root+path.sep)){res.writeHead(403);return res.end();}fs.readFile(file,(err,data)=>{if(err){res.writeHead(404);return res.end();}const types={'.html':'text/html','.css':'text/css','.js':'text/javascript','.geojson':'application/json'};res.setHeader('Content-Type',types[path.extname(file)]||'application/octet-stream');res.end(data);});});
@@ -11,9 +11,9 @@ browser=await chromium.launch(launch);
 const page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
 const url='http://127.0.0.1:'+server.address().port;
 const mapAssets=new Map();page.on('response',response=>{if(/leaflet@1\.9\.4\/dist\/leaflet\.(?:js|css)$/.test(response.url())&&response.ok())mapAssets.set(response.url(),response.body().then(body=>({body,contentType:response.headers()['content-type']})));});
-async function failurePage(){const p=await browser.newPage();await p.route('**/leaflet@1.9.4/dist/**',async route=>{const asset=mapAssets.get(route.request().url());if(asset)await route.fulfill(await asset);else await route.continue();});return p;}
+async function failurePage(){const p=await browser.newPage();await returningVisitor(p);await p.route('**/leaflet@1.9.4/dist/**',async route=>{const asset=mapAssets.get(route.request().url());if(asset)await route.fulfill(await asset);else await route.continue();});return p;}
 
-await page.goto(url,{waitUntil:'networkidle',timeout:60000});await page.waitForFunction(()=>window._route?.length>1,{timeout:10000});
+await returningVisitor(page);await page.goto(url,{waitUntil:'networkidle',timeout:60000});await page.waitForFunction(()=>window._route?.length>1,{timeout:10000});
 assert(!/\uFFFD|Â°|â€™|â†/.test(await page.locator('body').innerText()),'No damaged display symbols');
 assertCleanText(await page.locator('body').innerText());
 assert.equal(await page.locator('#exportBtn').isDisabled(),false);

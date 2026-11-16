@@ -9,4 +9,5 @@ async function serve(root){
  const server=http.createServer((req,res)=>{let relative;try{relative=decodeURIComponent(req.url.split('?')[0]);}catch{res.writeHead(400);return res.end();}const file=path.resolve(root,'.'+(relative==='/'?'/index.html':relative));if(!file.startsWith(root+path.sep)){res.writeHead(403);return res.end();}fs.readFile(file,(error,data)=>{if(error){res.writeHead(404);return res.end();}res.setHeader('Content-Type',({'.html':'text/html','.css':'text/css','.js':'text/javascript','.json':'application/json','.geojson':'application/json','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg'})[path.extname(file)]||'application/octet-stream');res.end(data);});});
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));return {url:'http://127.0.0.1:'+server.address().port,close:()=>new Promise(resolve=>server.close(resolve))};
 }
-module.exports={chromium,launchOptions,assertCleanText,serve};
+async function returningVisitor(page){await page.addInitScript(()=>{try{localStorage.setItem('aresTrail:onboarding:v1','completed');}catch{}});}
+module.exports={chromium,launchOptions,assertCleanText,serve,returningVisitor};
